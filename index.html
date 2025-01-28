@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon API</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/2.svg"
+    />
+  </head>
+  <body class="bg-[url('/assets/Background.png')]">
+    <div>
+      <button id="mute">
+        <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
+      </button>
+      <input id="search" type="text" />
+      <button>
+        <img id="searchBtn" src="/assets/search.svg" alt="search" /></button
+      ><button id="randomBtn">random</button>
+      <div class="topBar flex justify-center p-3">
+          <h1 class="text-2xl" id="name">Name</h1>
+      </div>
+
+      <div class="grid grid-cols-3 m-15 mt-3 gap-2.5">
+        <div class=>
+          <div class="flex justify-evenly">
+            <img id="type" src="" alt="type1" />
+            <img id="type2" src="" alt="type2" />
+          </div>
+          <div class="flex justify-center">
+              <div class="mainImg">
+                  <img width="200px" id="pokemonImg" src="" alt="Pokemon" />
+                </div>
+            </div>
+            <button id="shiny">
+            <img id="shinyIcon" src="/assets/Shiny.png" alt="shiny" />
+          </button>
+        </div>
+        
+        <!-- Info -->
+        <div class="infoBox text-center bg-white rounded-xl">
+            <h1 class="text-3xl topBar rounded-t-xl">Info</h1>
+            <h1 class="text-2xl">Abilities</h1>
+            <p id="ability1"></p>
+            <p id="ability2"></p>
+            <p id="ability3"></p>
+            <h1 class="text-2xl">Location</h1>
+            <p id="location"></p>
+        </div>
+        
+        <!-- Stats -->
+        <div id="statsDiv" class="grid grid-cols-2 bg-white rounded-xl">
+            <div>
+                <p id="HP"></p>
+                <p id="Attack"></p>
+                <p id="Defense"></p>
+            </div>
+            <div>
+                <p id="SpAttack"></p>
+                <p id="SpDefense"></p>
+                <p id="Speed"></p>
+            </div>
+        </div>
+        
+        <!-- Evolution Family-->
+        <div class="bg-white rounded-xl">
+            <h1 class="text-3xl topBar flex justify-center rounded-t-xl">Family</h1>
+        </div>
+        <!-- Moves -->
+        <div class="bg-white rounded-xl">
+          <h1 class="text-3xl topBar flex justify-center rounded-t-xl">Moves</h1>
+          <div class="moveList">
+            <ul id="list"></ul>
+          </div>
+        </div>
+      </div>
+      <!-- Main Img -->
+    </div>
+
+    <audio id="pokemonCry" src=""></audio>
+    <audio
+      id="bgMusic"
+      src="/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3"
+    ></audio>
+    <script src="/scripts/app.js"></script>
+  </body>
+</html>

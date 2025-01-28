@@ -1,0 +1,17 @@
+.mainImg{
+    background-image: url(/assets/pokeball-pokemon-catch.svg);
+    background-repeat: no-repeat;
+}
+
+.moveList{
+    height: 150px;
+    overflow: scroll;
+}
+
+.infoBox{
+    grid-column: 2/4;
+}
+
+.topBar{
+    background-color: #40B2AE;
+}
