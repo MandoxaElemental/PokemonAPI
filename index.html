@@ -15,24 +15,27 @@
   </head>
   <body>
     <div>
-        <div class="grid grid-cols-6 p-1">
+        <!-- Search Bar -->
+        <div class="grid auto-cols-auto p-2.5">
             <button id="mute">
               <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
             </button>
             <div class="searchBar">
-                <input class="rounded-l-md" id="search" type="text" />
+                <button class="randomBtn rounded-l-md searchBtn" id="randomBtn">
+                    <img src="/assets/dice-5.svg" alt="random">
+                </button>
+                <input class="text-xl" id="search" type="text" />
                 <button class="searchBtn rounded-r-md">
                   <img id="searchBtn" src="/assets/search.svg" alt="search" />
                 </button>
             </div>
             
-            <button class="randomBtn rounded-md" id="randomBtn">RANDOM</button>
             <button class="savedBtn flex justify-end">
                 <img id="savedBtn" src="/assets/2.png" alt="search" />
               </button>
         </div>
       <div class="topBar flex justify-center p-3">
-          <h1 class="text-2xl" id="name">Name</h1>
+          <h1 class="text-3xl font-bold" id="name">Name</h1>
       </div>
 
       <div class="grid grid-cols-3 m-15 mt-3 gap-2.5">
@@ -53,26 +56,34 @@
         
         <!-- Info -->
         <div class="infoBox text-center bg-white rounded-xl">
-            <h1 class="text-3xl topBar rounded-t-xl">Info</h1>
-            <h1 class="text-2xl">Abilities</h1>
-            <p id="ability1"></p>
-            <p id="ability2"></p>
-            <p id="ability3"></p>
-            <h1 class="text-2xl">Location</h1>
-            <p id="location"></p>
+            <div class="topBar rounded-t-xl grid-cols-3 grid">
+                <img id="savedPokemon" src="/assets/2.svg" alt="saved">
+                <h1 class="text-3xl">Info</h1>
+            </div>
+            <div class="p-5">
+                <h1 class="text-2xl">Abilities</h1>
+                <p id="ability1"></p>
+                <p id="ability2"></p>
+                <p id="ability3"></p>
+                <h1 class="text-2xl">Location</h1>
+                <p id="location"></p>
+            </div>
         </div>
         
         <!-- Stats -->
-        <div id="statsDiv" class="grid grid-cols-2 bg-white rounded-xl">
-            <div>
-                <p id="HP"></p>
-                <p id="Attack"></p>
-                <p id="Defense"></p>
-            </div>
-            <div>
-                <p id="SpAttack"></p>
-                <p id="SpDefense"></p>
-                <p id="Speed"></p>
+        <div id="statsDiv">
+            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl ">Stats</h1>
+            <div class="grid grid-cols-2 bg-white rounded-xl text-lg text-center moveList p-5">
+                <div>
+                    <p id="HP"></p>
+                    <p id="Attack"></p>
+                    <p id="Defense"></p>
+                </div>
+                <div>
+                    <p id="SpAttack"></p>
+                    <p id="SpDefense"></p>
+                    <p id="Speed"></p>
+                </div>
             </div>
         </div>
         
@@ -85,7 +96,7 @@
         <!-- Moves -->
         <div class="bg-white rounded-xl">
           <h1 class="text-3xl topBar flex justify-center rounded-t-xl">Moves</h1>
-          <div class="moveList">
+          <div class="moveList text-lg text-center">
             <ul id="list"></ul>
           </div>
         </div>
