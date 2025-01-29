@@ -45,6 +45,7 @@ let Speed = document.getElementById("Speed");
 
 let MissingNoArr = ["Mega Punch", "Razor Wind", "Swords Dance", "Mega Kick", "Toxic", "Take Down", "Double-Edge", "Bubble Beam", "Ice Beam", "Blizzard", "Submission", "Seismic Toss", "Rage", "Thunder", "Earthquake", "Fissure", "Psychic", "Teleport", "Sky Attack", "Rest", "Thunder Wave", "Tri Attack", "Substitute", "Cut", "Fly", "Pay Day", "Bind", "Water Gun"]
 let MissingNoLocation = ["Old Man Glitch", "Mew Glitch", "Time Capsule Exploit"]
+let MissingNoFamily = ["/assets/Missingno_RB.png", "/assets/Missingno_Y.png", "/assets/Spr_1b_142_f.png", "/assets/Spr_1b_141_f.png", "/assets/Ghost_I.png"]
 
 BGMusic.loop = true;
 
@@ -269,7 +270,6 @@ const getPokemon = async () => {
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
             Family.appendChild(familyName);
-            let NewVar = ToUpper(EvolutionArr[i]);
           };
           FinalImg();
         };
@@ -280,19 +280,42 @@ const getPokemon = async () => {
   };
   EvolutionChain();
 
+  function SpecificNames(){
+    if(data.name === "ho-oh"){
+        Name.innerText = "#" + data.id + " - Ho-oh"
+    } else if (data.name === "porygon-z"){
+        Name.innerText = "#" + data.id + " - Porygon-Z"
+    } else if (data.name === "jangmo-0"){
+        Name.innerText = "#" + data.id + " - Jangmo-o"
+    } else if (data.name === "hakamo-o"){
+        Name.innerText = "#" + data.id + " - Hakamo-o"
+    } else if (data.name === "kommo-o"){
+        Name.innerText = "#" + data.id + " - Kommo-o"
+    } else if (data.name === "wo-chien"){
+        Name.innerText = "#" + data.id + " - Wo-Chien"
+    } else if (data.name === "chien-pao"){
+        Name.innerText = "#" + data.id + " - Chien-Pao"
+    } else if (data.name === "ting-lu"){
+        Name.innerText = "#" + data.id + " - Ting-Lu"
+    } else if (data.name === "chi-yu"){
+        Name.innerText = "#" + data.id + " - Chi-Yu"
+    } else {
+    Name.innerText = "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
+    }
+    }
+    
   const promise = await fetch(FetchLink);
   const data = await promise.json();
   console.log(data);
-  Name.innerText =
-    "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
+  SpecificNames();
   document.getElementById("pokemonImg").src =
     data.sprites.other.home.front_default;
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
   Attack.innerText = "Attack: " + data.stats[1].base_stat;
   Defense.innerText = "Defense: " + data.stats[2].base_stat;
-  SpAttack.innerText = "Sp. Attack: " + data.stats[3].base_stat;
-  SpDefense.innerText = "Sp. Defense: " + data.stats[4].base_stat;
+  SpAttack.innerText = "Sp.Attack: " + data.stats[3].base_stat;
+  SpDefense.innerText = "Sp.Defense: " + data.stats[4].base_stat;
   Speed.innerText = "Speed: " + data.stats[5].base_stat;
   Shiny = data.sprites.other.home.front_shiny;
   ShinyImg = true;
@@ -370,7 +393,7 @@ function empty(element) {
 }
 
 function SearchFunction() {
-  userInput = Search.value;
+  userInput = Search.value.replaceAll(" ", "-");
   FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
   EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
   Default = "";
@@ -394,11 +417,13 @@ function SearchFunction() {
 Search.addEventListener("keypress", async () => {
   if (event.key === "Enter") {
       SearchFunction();
+      Search.value = ""
   }
 });
 
 SearchBtn.addEventListener("click", async () => {
     SearchFunction();
+    Search.value = ""
 });
 
 function ShinyFunction() {
@@ -454,8 +479,8 @@ function MissingNoInfo(){
   HP.innerText = "HP: 33"
   Attack.innerText = "Attack: 136"
   Defense.innerText = "Defense: 0"
-  SpAttack.innerText = "Sp. Attack: 6"
-  SpDefense.innerText = "Sp. Defense: 0"
+  SpAttack.innerText = "Sp.Attack: 6"
+  SpDefense.innerText = "Sp.Defense: 0"
   Speed.innerText = "Speed: 29"
   Ability1.innerText = "N/A"
   Ability2.hidden = true;
@@ -473,4 +498,15 @@ function MissingNoInfo(){
 
   let LocationNum = Math.floor(Math.random() * MissingNoLocation.length)
   LocationInfo.innerText = MissingNoLocation[LocationNum]
+
+  document.getElementById("pokemonCry").src = "/assets/audio/MissingNoCry.wav";
+    PokemonCry.play();
+
+    for(let i=0; i < MissingNoFamily.length; i++){
+      let familyName = document.createElement("img");
+      familyName.src = MissingNoFamily[i];
+      familyName.setAttribute("class", "family");
+      familyName.setAttribute("id", EvolutionArr[i]);
+      Family.appendChild(familyName);
+    }
 }

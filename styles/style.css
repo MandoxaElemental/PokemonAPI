@@ -2,7 +2,7 @@ body{
     background-image: url('/assets/Background.png');
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Courier New', Courier, monospace;
 }
 
 .mainImg{
@@ -70,6 +70,9 @@ input{
 }
 
 #shiny:hover{
+    opacity: 60%;
+}
+#audioOn:hover{
     opacity: 60%;
 }
 
