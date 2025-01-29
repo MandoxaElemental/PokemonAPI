@@ -13,14 +13,20 @@ let Default = "";
 let Shiny = "";
 let userInput = "";
 let FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+let PokemonID = "";
+let FinalImgFetchLink = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
 let ChainNum = 1;
 let EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
+let ImgFetchLink = "";
 let FirstType = "";
 let SecondType = "";
 let Search = document.getElementById("search");
 let LocationInfo = document.getElementById("location");
 let MoveArr = [];
 let EvolutionArr = [];
+let EvolutionUrlArr = [];
+let FamilyArr = [];
+let Family = document.getElementById("family");
 let list = document.getElementById("list");
 let BGMusic = document.getElementById("bgMusic");
 let RandomNum = Math.floor(Math.random() * 650);
@@ -36,6 +42,9 @@ let Defense = document.getElementById("Defense");
 let SpAttack = document.getElementById("SpAttack");
 let SpDefense = document.getElementById("SpDefense");
 let Speed = document.getElementById("Speed");
+
+let MissingNoArr = ["Mega Punch", "Razor Wind", "Swords Dance", "Mega Kick", "Toxic", "Take Down", "Double-Edge", "Bubble Beam", "Ice Beam", "Blizzard", "Submission", "Seismic Toss", "Rage", "Thunder", "Earthquake", "Fissure", "Psychic", "Teleport", "Sky Attack", "Rest", "Thunder Wave", "Tri Attack", "Substitute", "Cut", "Fly", "Pay Day", "Bind", "Water Gun"]
+let MissingNoLocation = ["Old Man Glitch", "Mew Glitch", "Time Capsule Exploit"]
 
 BGMusic.loop = true;
 
@@ -195,31 +204,77 @@ function Types2() {
 
 const getPokemon = async () => {
   EvolutionArr = [];
+  EvolutionUrlArr = [];
   EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
   const EvolutionChain = async () => {
     const promise = await fetch(EvolutionLink);
     const data = await promise.json();
     let EvolutionChain = data.evolution_chain.url;
-    console.log(EvolutionChain);
 
     const GetEvolutionChain = async () => {
       const promise = await fetch(EvolutionChain);
       const data = await promise.json();
-      console.log(data);
       EvolutionArr.push(data.chain.species.name);
-      if(data.chain.evolves_to.length !== 0){
+      EvolutionUrlArr.push(data.chain.species.url);
+      if (data.chain.evolves_to.length !== 0) {
         for (let i = 0; i < data.chain.evolves_to.length; i++) {
           EvolutionArr.push(data.chain.evolves_to[i].species.name);
-          if (data.chain.evolves_to[0].evolves_to.length !== 0) {
-            for (let j = 0; j < data.chain.evolves_to[0].evolves_to.length; j++) {
+          EvolutionUrlArr.push(data.chain.evolves_to[i].species.url);
+          if (data.chain.evolves_to[i].evolves_to.length !== 0) {
+            for (
+              let j = 0;
+              j < data.chain.evolves_to[i].evolves_to.length;
+              j++
+            ) {
               EvolutionArr.push(
-                data.chain.evolves_to[0].evolves_to[j].species.name
-              )
+                data.chain.evolves_to[i].evolves_to[j].species.name
+              );
+              EvolutionUrlArr.push(
+                data.chain.evolves_to[i].evolves_to[j].species.url
+              );
+              if (
+                data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0
+              ) {
+                for (
+                  let k = 0;
+                  k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length;
+                  k++
+                ) {
+                  EvolutionArr.push(
+                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
+                      .name
+                  );
+                  EvolutionUrlArr.push(
+                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
+                      .url
+                  );
+                }
+              }
             }
           }
         }
       }
-      console.log(EvolutionArr);
+      for (let i = 0; i < EvolutionUrlArr.length; i++) {
+        ImgFetchLink = EvolutionUrlArr[i];
+        const FamilyImg = async () => {
+          const promise = await fetch(ImgFetchLink);
+          const data = await promise.json();
+          let PokemonID = data.id;
+          FinalImgFetchLink = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
+          const FinalImg = async () => {
+            const promise = await fetch(FinalImgFetchLink);
+            const data = await promise.json();
+            let familyName = document.createElement("img");
+            familyName.src = data.sprites.other.home.front_default;
+            familyName.setAttribute("class", "family");
+            familyName.setAttribute("id", EvolutionArr[i]);
+            Family.appendChild(familyName);
+            let NewVar = ToUpper(EvolutionArr[i]);
+          };
+          FinalImg();
+        };
+        FamilyImg();
+      }
     };
     GetEvolutionChain();
   };
@@ -322,28 +377,48 @@ function SearchFunction() {
   Shiny = "";
   document.getElementById("shinyIcon").src = "/assets/Shiny.png";
   ShinyImg = true;
-  getPokemon();
   empty(list);
+  empty(Family);
+
+  try {
+    getPokemon()
+  } catch (error) {
+    MissingNoInfo()
+  }
+
+  if(userInput === "" || userInput === "0"){
+    MissingNoInfo()
+  }
 }
 
 Search.addEventListener("keypress", async () => {
   if (event.key === "Enter") {
-    SearchFunction();
+      SearchFunction();
   }
 });
 
 SearchBtn.addEventListener("click", async () => {
-  SearchFunction();
+    SearchFunction();
 });
 
 function ShinyFunction() {
   ShinyBtn.addEventListener("click", async () => {
     if (ShinyImg === true) {
-      document.getElementById("pokemonImg").src = Shiny;
+      if(Name.innerText === "#000 - MissingNo.")
+        {
+          document.getElementById("pokemonImg").src = "/assets/Ketsuban.png";
+        }else{
+          document.getElementById("pokemonImg").src = Shiny;
+        }
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
       ShinyImg = false;
     } else {
-      document.getElementById("pokemonImg").src = Default;
+      if(Name.innerText === "#000 - MissingNo.")
+        {
+          document.getElementById("pokemonImg").src = "/assets/Missingno_RB.png";
+        } else {
+          document.getElementById("pokemonImg").src = Default;
+        }
       document.getElementById("shinyIcon").src = "/assets/Shiny.png";
       ShinyImg = true;
     }
@@ -361,6 +436,7 @@ RandomBtn.addEventListener("click", async () => {
   ShinyImg = true;
   getPokemon();
   empty(list);
+  empty(Family);
 });
 
 function RandomPokemon() {
@@ -371,14 +447,30 @@ function RandomPokemon() {
 }
 RandomPokemon();
 
-// Name = data.name
-// Type 1 = data.types[0].type.name
-// Type 1 = data.types[1].type.name
-// Ability 1 = data.abilities[0].ability.name
-// Ability 2 = data.abilities[1].ability.name
-// Ability 3 = data.abilities[2].ability.name
-// Moves = data.moves
-// Location = data.location_area_encounters
-// Img = data.sprites.other.home.front_default
-// ImgShiny = data.sprites.other.home.front_shiny
-// Cry = data.cries.latest
+
+function MissingNoInfo(){
+  Name.innerText = "#000 - MissingNo.";
+  document.getElementById("pokemonImg").src = "/assets/Missingno_RB.png";
+  HP.innerText = "HP: 33"
+  Attack.innerText = "Attack: 136"
+  Defense.innerText = "Defense: 0"
+  SpAttack.innerText = "Sp. Attack: 6"
+  SpDefense.innerText = "Sp. Defense: 0"
+  Speed.innerText = "Speed: 29"
+  Ability1.innerText = "N/A"
+  Ability2.hidden = true;
+  Ability3.hidden = true;
+  LocationInfo.innerText = "N/A";
+  document.getElementById("type").src = "/assets/pokemonTypes/Normal.png";
+  Type2.hidden = true;
+
+  for (let i = 0; i < MissingNoArr.length; i++) {
+    MoveArr.push(MissingNoArr[i]);
+    let ul = document.createElement("ul");
+    ul.innerText = MissingNoArr[i]
+    list.appendChild(ul);
+  }
+
+  let LocationNum = Math.floor(Math.random() * MissingNoLocation.length)
+  LocationInfo.innerText = MissingNoLocation[LocationNum]
+}

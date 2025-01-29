@@ -13,15 +13,24 @@
       href="./assets/2.svg"
     />
   </head>
-  <body class="bg-[url('/assets/Background.png')]">
+  <body>
     <div>
-      <button id="mute">
-        <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
-      </button>
-      <input id="search" type="text" />
-      <button>
-        <img id="searchBtn" src="/assets/search.svg" alt="search" /></button
-      ><button id="randomBtn">random</button>
+        <div class="grid grid-cols-6 p-1">
+            <button id="mute">
+              <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
+            </button>
+            <div class="searchBar">
+                <input class="rounded-l-md" id="search" type="text" />
+                <button class="searchBtn rounded-r-md">
+                  <img id="searchBtn" src="/assets/search.svg" alt="search" />
+                </button>
+            </div>
+            
+            <button class="randomBtn rounded-md" id="randomBtn">RANDOM</button>
+            <button class="savedBtn flex justify-end">
+                <img id="savedBtn" src="/assets/2.png" alt="search" />
+              </button>
+        </div>
       <div class="topBar flex justify-center p-3">
           <h1 class="text-2xl" id="name">Name</h1>
       </div>
@@ -69,9 +78,8 @@
         
         <!-- Evolution Family-->
         <div class="bg-white rounded-xl">
-            <h1 class="text-3xl topBar flex justify-center rounded-t-xl">Family</h1>
-            <div id="family" class="grid grid-cols-2">
-                
+            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl">Family</h1>
+            <div id="family" class="grid grid-cols-3 moveList gap-2.5 p-5">
             </div>
         </div>
         <!-- Moves -->

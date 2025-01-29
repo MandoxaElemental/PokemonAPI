@@ -1,10 +1,16 @@
+body{
+    background-image: url('/assets/Background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .mainImg{
     background-image: url(/assets/pokeball-pokemon-catch.svg);
     background-repeat: no-repeat;
 }
 
 .moveList{
-    height: 150px;
+    max-height: 150px;
     overflow: scroll;
 }
 
@@ -13,5 +19,52 @@
 }
 
 .topBar{
+    background-color: #40B2AE;
+    padding: 10px;
+}
+
+#family > img{
+    width: 150px;
+}
+#family > img:hover{
+    opacity: 80%;
+}
+
+input{
+    background-color: white;
+    height: 30px;
+    width: 75%;
+}
+.savedBtn{
+    grid-column: 6/7;
+}
+#savedBtn{
+    height: 40px;
+}
+#savedBtn:hover{
+    opacity: 80%;
+}
+
+.searchBar{
+    grid-column: 3/5;
+    display: flex;
+    align-items: center;
+}
+#searchBtn{
+    padding-left: 20px;
+}
+.searchBtn{
+    background-color: #40B2AE;
+    height: 30px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.searchBtn:hover{
+    opacity: 80%;
+}
+
+.randomBtn{
     background-color: #40B2AE;
 }
