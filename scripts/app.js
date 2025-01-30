@@ -32,6 +32,13 @@ let ShinyAudio = document.getElementById("shinyAudio");
 let RandomNum = Math.floor(Math.random() * 650);
 let Mute = document.getElementById("mute");
 let MuteBool = true;
+let SavedList = document.getElementById("savedBtn")
+let DropdownContent = document.getElementById("dropdownContent")
+let storedValue = document.getElementById("storedValue")
+let X = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg>`
 
 let CurrentMon = ""
 let SavedBool = true
@@ -528,8 +535,48 @@ SaveBtn.addEventListener("click", async () => {
   if(getFromLocalStorage().includes(CurrentMon)){
     document.getElementById("savedPokemon").src = "/assets/2.svg"
     removeFromLocalStorage(CurrentMon)
+    createElements()
   }  else {
     document.getElementById("savedPokemon").src = "/assets/2Active.svg"
     saveToLocalStorage(CurrentMon)
+    createElements()
   }
 });
+
+SavedList.addEventListener("click", async () => {
+  if (DropdownContent.style.display === "none") {
+    DropdownContent.style.display = "block";
+    createElements();
+  } else {
+    DropdownContent.style.display = "none";
+  }
+})
+
+function createElements() {
+  let LocalPokemon = getFromLocalStorage();
+  storedValue.innerHTML= "";
+  
+  LocalPokemon.map(SavedPokemonList => {
+      let p = document.createElement('p');
+      p.className = "savedPokemon";
+      p.textContent = SavedPokemonList;
+      //p.setAttribute("onClick", `${SavedPokemonFunction()}`)
+
+      let deletebtn = document.createElement('button');
+      deletebtn.type = 'button';
+      deletebtn.className = "removePokemon";
+      deletebtn.innerHTML = X
+
+      deletebtn.addEventListener('click', function () {
+          removeFromLocalStorage(SavedPokemonList);
+          p.remove();
+          if(CurrentMon === p){
+            document.getElementById("savedPokemon").src = "/assets/active2.svg"
+          }
+      });
+
+      p.appendChild(deletebtn);
+
+      storedValue.appendChild(p);
+  });
+};

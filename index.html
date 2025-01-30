@@ -33,6 +33,14 @@
             <button class="savedBtn flex justify-end">
                 <img id="savedBtn" src="/assets/2.png" alt="search" />
               </button>
+              <div id="dropdownContent" class="bg-white rounded-xl dropdownContent">
+                <h1 class="text-3xl topBarSaved flex justify-center align-middle rounded-t-xl font-bold">Saved</h1>
+                <div id="savedList" class="moveList gap-2.5 p-5">
+                  <div id="storedValue" class="text-center">
+                    <p>Currently Empty; Add Some More Pokemon</p>
+                  </div>
+                </div>
+            </div>
         </div>
       <div class="topBar flex justify-center p-3">
           <h1 class="text-3xl font-bold" id="name">Name</h1>
@@ -47,7 +55,7 @@
           <div class="flex justify-center">
               <div class="mainImg">
                   <img width="200px" id="pokemonImg" src="" alt="Pokemon" />
-                </div>
+              </div>
             </div>
             <div>
                 <button id="shiny">
@@ -57,7 +65,7 @@
         </div>
         
         <!-- Info -->
-        <div class="infoBox text-center bg-white rounded-xl">
+        <div class="infoBox text-center rounded-xl">
             <div class="topBar rounded-t-xl grid-cols-3 grid">
                 <img class="notSaved" id="savedPokemon" src="/assets/2.svg" alt="saved">
                 <h1 class="text-3xl font-bold">Info</h1>
@@ -77,7 +85,7 @@
         <!-- Stats -->
         <div id="statsDiv">
             <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Stats</h1>
-            <div class="grid grid-cols-2 bg-white rounded-xl text-lg text-center moveList p-5">
+            <div class="grid grid-cols-2 background rounded-xl text-lg text-center moveList p-5">
                 <div>
                     <p id="HP"></p>
                     <p id="Attack"></p>
@@ -92,13 +100,13 @@
         </div>
         
         <!-- Evolution Family-->
-        <div class="bg-white rounded-xl">
+        <div class="background rounded-xl">
             <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Family</h1>
             <div id="family" class="grid grid-cols-3 moveList gap-2.5 p-5">
             </div>
         </div>
         <!-- Moves -->
-        <div class="bg-white rounded-xl">
+        <div class="background rounded-xl">
           <h1 class="text-3xl topBar flex justify-center rounded-t-xl font-bold">Moves</h1>
           <div class="moveList text-lg text-center">
             <ul id="list"></ul>

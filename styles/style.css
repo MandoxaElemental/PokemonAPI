@@ -18,6 +18,11 @@ body{
 
 .infoBox{
     grid-column: 2/4;
+    background-color: rgba(255, 255, 255, 0.463);
+}
+
+.background{
+    background-color: rgba(255, 255, 255, 0.463);
 }
 
 .topBar{
@@ -33,7 +38,7 @@ body{
 }
 
 input{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.463);
     height: 40px;
     width: 85%;
     text-align: center;
@@ -80,5 +85,30 @@ input{
     height: 40px;
 }
 #savedPokemon:hover{
-    opacity: 80%;
+    opacity: 60%;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    right: 0;
+    top: 9.5%;
+    width: 350px;
+    max-width: 400px;
+  }
+
+  .topBarSaved{
+    background-color: #F5AD1A;
+    padding: 10px;
+}
+
+.removePokemon{
+    padding-left: 20px;
+}
+
+#savedList{
+    max-height: 150px;
+    overflow: scroll;
+    font-size: 20px
 }
