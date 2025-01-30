@@ -1,3 +1,5 @@
+//import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js";
+
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
 let Type = document.getElementById("type");
@@ -29,12 +31,14 @@ let FamilyArr = [];
 let Family = document.getElementById("family");
 let list = document.getElementById("list");
 let BGMusic = document.getElementById("bgMusic");
+let ShinyAudio = document.getElementById("shinyAudio");
 let RandomNum = Math.floor(Math.random() * 650);
 let Mute = document.getElementById("mute");
 let MuteBool = true;
 
 let SearchBtn = document.getElementById("searchBtn");
 let RandomBtn = document.getElementById("randomBtn");
+let SaveBtn = document.getElementById("savedPokemon")
 
 let HP = document.getElementById("HP");
 let Attack = document.getElementById("Attack");
@@ -269,6 +273,7 @@ const getPokemon = async () => {
             familyName.src = data.sprites.other.home.front_default;
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
+            familyName.setAttribute("onClick", "FamilyBtn()")
             Family.appendChild(familyName);
           };
           FinalImg();
@@ -309,7 +314,7 @@ const getPokemon = async () => {
   console.log(data);
   SpecificNames();
   document.getElementById("pokemonImg").src =
-    data.sprites.other.home.front_default;
+  data.sprites.other.home.front_default;
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
   Attack.innerText = "Attack: " + data.stats[1].base_stat;
@@ -414,6 +419,19 @@ function SearchFunction() {
   }
 }
 
+function FamilyBtn() {
+  empty(list);
+  empty(Family);
+  MissingNoInfo()
+  // userInput = document.getElementsByTagName("img")[0].id
+  // FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+  // Default = "";
+  // Shiny = "";
+  // document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+  // ShinyImg = true;
+  // getPokemon();
+};
+
 Search.addEventListener("keypress", async () => {
   if (event.key === "Enter") {
       SearchFunction();
@@ -436,6 +454,7 @@ function ShinyFunction() {
           document.getElementById("pokemonImg").src = Shiny;
         }
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
+      ShinyAudio.play()
       ShinyImg = false;
     } else {
       if(Name.innerText === "#000 - MissingNo.")
@@ -510,3 +529,13 @@ function MissingNoInfo(){
       Family.appendChild(familyName);
     }
 }
+let SaveBool = true
+SaveBtn.addEventListener("click", async () => {
+  if(SaveBool === true){
+    document.getElementById("savedPokemon").src = "/assets/2Active.svg"
+    SaveBool = false
+  }  else {
+    document.getElementById("savedPokemon").src = "/assets/2.svg"
+    SaveBool = true
+  }
+});

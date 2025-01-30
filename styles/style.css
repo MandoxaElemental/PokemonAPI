@@ -79,3 +79,6 @@ input{
 #savedPokemon{
     height: 40px;
 }
+#savedPokemon:hover{
+    opacity: 60%;
+}

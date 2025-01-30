@@ -39,7 +39,7 @@
       </div>
 
       <div class="grid grid-cols-3 m-15 mt-3 gap-2.5">
-        <div class=>
+        <div class="p-2.5">
           <div class="flex justify-evenly">
             <img id="type" src="" alt="type1" />
             <img id="type2" src="" alt="type2" />
@@ -49,16 +49,18 @@
                   <img width="200px" id="pokemonImg" src="" alt="Pokemon" />
                 </div>
             </div>
-            <button id="shiny">
-            <img id="shinyIcon" src="/assets/Shiny.png" alt="shiny" />
-          </button>
+            <div>
+                <button id="shiny">
+                    <img id="shinyIcon" src="/assets/Shiny.png" alt="shiny" />
+                </button>
+            </div>
         </div>
         
         <!-- Info -->
         <div class="infoBox text-center bg-white rounded-xl">
             <div class="topBar rounded-t-xl grid-cols-3 grid">
-                <img id="savedPokemon" src="/assets/2.svg" alt="saved">
-                <h1 class="text-3xl">Info</h1>
+                <img class="notSaved" id="savedPokemon" src="/assets/2.svg" alt="saved">
+                <h1 class="text-3xl font-bold">Info</h1>
             </div>
             <div class="p-2.5">
                 <h1 class="text-2xl font-bold">Abilities</h1>
@@ -74,7 +76,7 @@
         
         <!-- Stats -->
         <div id="statsDiv">
-            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl ">Stats</h1>
+            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Stats</h1>
             <div class="grid grid-cols-2 bg-white rounded-xl text-lg text-center moveList p-5">
                 <div>
                     <p id="HP"></p>
@@ -91,13 +93,13 @@
         
         <!-- Evolution Family-->
         <div class="bg-white rounded-xl">
-            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl">Family</h1>
+            <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Family</h1>
             <div id="family" class="grid grid-cols-3 moveList gap-2.5 p-5">
             </div>
         </div>
         <!-- Moves -->
         <div class="bg-white rounded-xl">
-          <h1 class="text-3xl topBar flex justify-center rounded-t-xl">Moves</h1>
+          <h1 class="text-3xl topBar flex justify-center rounded-t-xl font-bold">Moves</h1>
           <div class="moveList text-lg text-center">
             <ul id="list"></ul>
           </div>
@@ -111,6 +113,7 @@
       id="bgMusic"
       src="/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3"
     ></audio>
+    <audio id="shinyAudio" src="/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3"></audio>
     <script src="/scripts/app.js"></script>
   </body>
 </html>
