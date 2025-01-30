@@ -5,11 +5,11 @@ function saveToLocalStorage(saved){
         savedArr.push(saved);
     }
 
-    localStorage.setItem('SavedCountries', JSON.stringify(savedArr))
+    localStorage.setItem('SavedPokemon', JSON.stringify(savedArr))
 }
 
 function getFromLocalStorage(){
-    let localStorageData = localStorage.getItem('SavedCountries');
+    let localStorageData = localStorage.getItem('SavedPokemon');
 
     if(localStorageData == null){
         return [];
@@ -26,7 +26,7 @@ function removeFromLocalStorage(saved){
 
     localStorageData.splice(savedIndex, 1);
 
-    localStorage.setItem('SavedCountries', JSON.stringify(localStorageData))
+    localStorage.setItem('SavedPokemon', JSON.stringify(localStorageData))
 }
 
 export{saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage}

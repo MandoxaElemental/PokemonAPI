@@ -1,4 +1,4 @@
-//import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js";
+import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js";
 
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
@@ -10,14 +10,12 @@ let ShinyImg = true;
 let Ability1 = document.getElementById("ability1");
 let Ability2 = document.getElementById("ability2");
 let Ability3 = document.getElementById("ability3");
-let ShinyBool = true;
 let Default = "";
 let Shiny = "";
 let userInput = "";
 let FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
 let PokemonID = "";
 let FinalImgFetchLink = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
-let ChainNum = 1;
 let EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
 let ImgFetchLink = "";
 let FirstType = "";
@@ -27,7 +25,6 @@ let LocationInfo = document.getElementById("location");
 let MoveArr = [];
 let EvolutionArr = [];
 let EvolutionUrlArr = [];
-let FamilyArr = [];
 let Family = document.getElementById("family");
 let list = document.getElementById("list");
 let BGMusic = document.getElementById("bgMusic");
@@ -35,6 +32,9 @@ let ShinyAudio = document.getElementById("shinyAudio");
 let RandomNum = Math.floor(Math.random() * 650);
 let Mute = document.getElementById("mute");
 let MuteBool = true;
+
+let CurrentMon = ""
+let SavedBool = true
 
 let SearchBtn = document.getElementById("searchBtn");
 let RandomBtn = document.getElementById("randomBtn");
@@ -226,33 +226,15 @@ const getPokemon = async () => {
           EvolutionArr.push(data.chain.evolves_to[i].species.name);
           EvolutionUrlArr.push(data.chain.evolves_to[i].species.url);
           if (data.chain.evolves_to[i].evolves_to.length !== 0) {
-            for (
-              let j = 0;
-              j < data.chain.evolves_to[i].evolves_to.length;
-              j++
-            ) {
-              EvolutionArr.push(
-                data.chain.evolves_to[i].evolves_to[j].species.name
-              );
-              EvolutionUrlArr.push(
-                data.chain.evolves_to[i].evolves_to[j].species.url
-              );
-              if (
-                data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0
-              ) {
-                for (
-                  let k = 0;
-                  k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length;
-                  k++
-                ) {
-                  EvolutionArr.push(
-                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
-                      .name
-                  );
-                  EvolutionUrlArr.push(
-                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
-                      .url
-                  );
+            for (let j = 0; j < data.chain.evolves_to[i].evolves_to.length; j++) 
+              {
+              EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].species.name);
+              EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].species.url);
+              if (data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0) 
+              {
+                for (let k = 0; k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length; k++) {
+                  EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.name);
+                  EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.url);
                 }
               }
             }
@@ -286,23 +268,23 @@ const getPokemon = async () => {
   EvolutionChain();
 
   function SpecificNames(){
-    if(data.name === "ho-oh"){
+    if(data.name === "ho-oh" || data.name === "250"){
         Name.innerText = "#" + data.id + " - Ho-oh"
-    } else if (data.name === "porygon-z"){
+    } else if (data.name === "porygon-z"  || data.name === "474"){
         Name.innerText = "#" + data.id + " - Porygon-Z"
-    } else if (data.name === "jangmo-0"){
+    } else if (data.name === "jangmo-o" || data.name === "782"){
         Name.innerText = "#" + data.id + " - Jangmo-o"
-    } else if (data.name === "hakamo-o"){
+    } else if (data.name === "hakamo-o" || data.name === "783"){
         Name.innerText = "#" + data.id + " - Hakamo-o"
-    } else if (data.name === "kommo-o"){
+    } else if (data.name === "kommo-o" || data.name === "784"){
         Name.innerText = "#" + data.id + " - Kommo-o"
-    } else if (data.name === "wo-chien"){
+    } else if (data.name === "wo-chien" || data.name === "1001"){
         Name.innerText = "#" + data.id + " - Wo-Chien"
-    } else if (data.name === "chien-pao"){
+    } else if (data.name === "chien-pao" || data.name === "1002"){
         Name.innerText = "#" + data.id + " - Chien-Pao"
-    } else if (data.name === "ting-lu"){
+    } else if (data.name === "ting-lu" || data.name === "1003"){
         Name.innerText = "#" + data.id + " - Ting-Lu"
-    } else if (data.name === "chi-yu"){
+    } else if (data.name === "chi-yu" || data.name === "1004"){
         Name.innerText = "#" + data.id + " - Chi-Yu"
     } else {
     Name.innerText = "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
@@ -391,6 +373,10 @@ const getPokemon = async () => {
     PokemonCry.play();
   }
   PokemonmAudio();
+
+  CurrentMon = ToUpper(data.name.replaceAll("-", " "));
+  console.log(CurrentMon)
+  IsSaved();
 };
 
 function empty(element) {
@@ -529,13 +515,21 @@ function MissingNoInfo(){
       Family.appendChild(familyName);
     }
 }
-let SaveBool = true
-SaveBtn.addEventListener("click", async () => {
-  if(SaveBool === true){
+
+function IsSaved(){
+  if(getFromLocalStorage().includes(CurrentMon)){
     document.getElementById("savedPokemon").src = "/assets/2Active.svg"
-    SaveBool = false
   }  else {
     document.getElementById("savedPokemon").src = "/assets/2.svg"
-    SaveBool = true
+  }
+}
+
+SaveBtn.addEventListener("click", async () => {
+  if(getFromLocalStorage().includes(CurrentMon)){
+    document.getElementById("savedPokemon").src = "/assets/2.svg"
+    removeFromLocalStorage(CurrentMon)
+  }  else {
+    document.getElementById("savedPokemon").src = "/assets/2Active.svg"
+    saveToLocalStorage(CurrentMon)
   }
 });
