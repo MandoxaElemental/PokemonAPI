@@ -56,7 +56,9 @@ let SpecialPokemonArr = [
   "meloetta",
   "tornadus",
   "thundurus",
-  "landorus"
+  "landorus",
+  "basculegion",
+  "dudunsparce"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -68,7 +70,9 @@ let SpecialPokemonNum = [
   "648",
   "641",
   "642",
-  "645"
+  "645",
+  "902",
+  "982"
 ]
 
 let SpecialNamesArr = [
@@ -90,7 +94,12 @@ let SpecialNamesArr = [
 "meloetta-aria",
 "tornadus-incarnate",
 "thundurus-incarnate",
-"landorus-incarnate"
+"landorus-incarnate",
+"mime-jr",
+"mr-mime",
+"mr-rime",
+"basculegion-male",
+"dudunsparce-two-segment"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -111,7 +120,12 @@ let ScreenNameArr = [
 "Meloetta",
 "Tornadus",
 "Thundurus",
-"Landorus"
+"Landorus",
+"Mime Jr.",
+"Mr. Mime",
+"Mr. Rime",
+"Basculegion",
+"Dudunsparce"
 ]
 
 let SearchBtn = document.getElementById("searchBtn");
@@ -731,3 +745,7 @@ DropdownContent.addEventListener("mouseout", async () => {
 PokemonImg.addEventListener('click', async () => {
   PokemonCry.play()
 })
+
+function ExtendedFamily(){
+  
+}
