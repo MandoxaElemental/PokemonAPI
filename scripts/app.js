@@ -634,8 +634,6 @@ function NumberCheck(){
     if(convertedNum > 649){
       userInput = "0"
     }
-  } else {
-    userInput = Search.value.replaceAll(" ", "-");
   }
 }
 
