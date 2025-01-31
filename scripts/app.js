@@ -6,6 +6,7 @@ import {
 
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
+let convertedNum = 0;
 let Type = document.getElementById("type");
 let Type2 = document.getElementById("type2");
 let PokemonImg = document.getElementById("pokemonImg");
@@ -627,8 +628,20 @@ function SpecificSearches(){
   }
 }
 
+function NumberCheck(){
+  convertedNum = Number(userInput);
+  if (convertedNum >= 0){
+    if(convertedNum > 649){
+      userInput = "0"
+    }
+  } else {
+    userInput = Search.value.replaceAll(" ", "-");
+  }
+}
+
 function SearchFunction() {
   userInput = Search.value.replaceAll(" ", "-");
+  NumberCheck()
   SpecificSearches()
   Default = "";
   Shiny = "";
