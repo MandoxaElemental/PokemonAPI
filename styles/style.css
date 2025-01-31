@@ -121,6 +121,10 @@ input{
     padding-left: 20px;
 }
 
+.removePokemon:hover{
+    opacity: 50%;
+}
+
 #savedList{
     max-height: 250px;
     overflow: scroll;

@@ -39,12 +39,80 @@ let MuteBool = true;
 let SavedList = document.getElementById("savedBtn");
 let DropdownContent = document.getElementById("dropdownContent");
 let storedValue = document.getElementById("storedValue");
-let X = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg>`;
 
 let CurrentMon = "";
+
+let SpecialPokemonArr = [
+  "deoxys",
+  "wormadam",
+  "shaymin",
+  "giratina",
+  "basculin",
+  "darmanitan",
+  "meloetta",
+  "tornadus",
+  "thundurus",
+  "landorus"
+]
+let SpecialPokemonNum = [
+  "386",
+  "413",
+  "492",
+  "487",
+  "550",
+  "555",
+  "648",
+  "641",
+  "642",
+  "645"
+]
+
+let SpecialNamesArr = [
+"ho-oh",
+"porygon-z",
+"jangmo-o",
+"hakamo-o",
+"kommo-o",
+"wo-chien",
+"chien-pao",
+"ting-lu",
+"chi-yu",
+"deoxys-normal",
+"wormadam-plant",
+"shaymin-land",
+"giratina-altered",
+"basculin-red-striped",
+"darmanitan-standard",
+"meloetta-aria",
+"tornadus-incarnate",
+"thundurus-incarnate",
+"landorus-incarnate"
+]
+let ScreenNameArr = [
+"Ho-oh",
+"Porygon-z",
+"Jangmo-o",
+"Hakamo-o",
+"Kommo-o",
+"Wo-Chien",
+"Chien-Pao",
+"Ting-Lu",
+"Chi-Yu",
+"Deoxys",
+"Wormadam",
+"Shaymin",
+"Giratina",
+"Basculin",
+"Darmanitan",
+"Meloetta",
+"Tornadus",
+"Thundurus",
+"Landorus"
+]
 
 let SearchBtn = document.getElementById("searchBtn");
 let RandomBtn = document.getElementById("randomBtn");
@@ -336,33 +404,20 @@ const getPokemon = async () => {
   EvolutionChain();
 
   function SpecificNames() {
-    if (data.name === "ho-oh" || data.name === "250") {
-      Name.innerText = "#" + data.id + " - Ho-oh";
-    } else if (data.name === "porygon-z" || data.name === "474") {
-      Name.innerText = "#" + data.id + " - Porygon-Z";
-    } else if (data.name === "jangmo-o" || data.name === "782") {
-      Name.innerText = "#" + data.id + " - Jangmo-o";
-    } else if (data.name === "hakamo-o" || data.name === "783") {
-      Name.innerText = "#" + data.id + " - Hakamo-o";
-    } else if (data.name === "kommo-o" || data.name === "784") {
-      Name.innerText = "#" + data.id + " - Kommo-o";
-    } else if (data.name === "wo-chien" || data.name === "1001") {
-      Name.innerText = "#" + data.id + " - Wo-Chien";
-    } else if (data.name === "chien-pao" || data.name === "1002") {
-      Name.innerText = "#" + data.id + " - Chien-Pao";
-    } else if (data.name === "ting-lu" || data.name === "1003") {
-      Name.innerText = "#" + data.id + " - Ting-Lu";
-    } else if (data.name === "chi-yu" || data.name === "1004") {
-      Name.innerText = "#" + data.id + " - Chi-Yu";
+    for(let i=0; i<SpecialNamesArr.length; i++)
+    if (data.name === SpecialNamesArr[i]) {
+      Name.innerText = "#" + data.id + " - " + ScreenNameArr[i];
+      CurrentMon = ScreenNameArr[i];
+      break;
     } else {
       Name.innerText =
         "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
+        CurrentMon = ToUpper(data.name.replaceAll("-", " "));
     }
   }
 
   const promise = await fetch(FetchLink);
   const data = await promise.json();
-  console.log(data);
   SpecificNames();
   document.getElementById("pokemonImg").src =
     data.sprites.other.home.front_default;
@@ -442,9 +497,6 @@ const getPokemon = async () => {
     PokemonCry.play();
   }
   PokemonmAudio();
-
-  CurrentMon = ToUpper(data.name.replaceAll("-", " "));
-  console.log(CurrentMon);
   IsSaved();
 };
 
@@ -452,22 +504,29 @@ function empty(element) {
   element.innerHTML = "";
 }
 
+function SpecificSearches(){
+  for (let i=0; i < SpecialPokemonNum.length; i++){
+    if(userInput.toLowerCase() === SpecialPokemonArr[i] || userInput === SpecialPokemonNum[i]){
+        FetchLink = `https://pokeapi.co/api/v2/pokemon/${SpecialPokemonNum[i]}`;
+        EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${SpecialPokemonNum[i]}`;
+        break;
+    } else {
+      FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+      EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
+    }
+  }
+}
+
 function SearchFunction() {
   userInput = Search.value.replaceAll(" ", "-");
-  FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
-  EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
+  SpecificSearches()
   Default = "";
   Shiny = "";
   document.getElementById("shinyIcon").src = "/assets/Shiny.png";
   ShinyImg = true;
   empty(list);
   empty(Family);
-
-  try {
-    getPokemon();
-  } catch (error) {
-    MissingNoInfo();
-  }
+  getPokemon();
 
   if (userInput === "" || userInput === "0") {
     MissingNoInfo();
@@ -492,6 +551,10 @@ SearchBtn.addEventListener("click", async () => {
   Search.value = "";
 });
 
+function ShinySound(){
+  ShinyAudio.play();
+}
+
 function ShinyFunction() {
   ShinyBtn.addEventListener("click", async () => {
     if (ShinyImg === true) {
@@ -501,7 +564,7 @@ function ShinyFunction() {
         document.getElementById("pokemonImg").src = Shiny;
       }
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
-      ShinyAudio.play();
+      ShinySound()
       ShinyImg = false;
     } else {
       if (Name.innerText === "#000 - MissingNo.") {
@@ -616,7 +679,6 @@ function createElements() {
     p.className = "yourSaved";
     p.textContent = SavedPokemonList;
     p.setAttribute("id", SavedPokemonList);
-    //p.setAttribute("onClick", `${SavedPokemonFunction()}`)
 
     let deletebtn = document.createElement("button");
     deletebtn.type = "button";
@@ -657,3 +719,7 @@ DropdownContent.addEventListener("mouseover", async () => {
 DropdownContent.addEventListener("mouseout", async () => {
   DropdownContent.style.display = "none";
 });
+
+PokemonImg.addEventListener('click', async () => {
+  PokemonCry.play()
+})
