@@ -32,7 +32,7 @@
     * figma
 
    
-> Notes: 
+> Notes: Shiny Sound and Background Music not functioning on Azure
 
 ### Pokemon API Challenge - Build_GitHub Repository Link:
 [Pokemon API Challenge - Build GitHub Repository Link]()
