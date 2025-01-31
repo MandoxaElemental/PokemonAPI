@@ -43,5 +43,7 @@
 ### Pokemon API Challenge - Build_Azure Link:
 [Pokemon API Challenge - Build Azure Repository Link]()
 
-This has been Peer Reviewed By: 
-> Comments: 
+This has been Peer Reviewed By: Ian Chesley
+> Comments: Very nicely done. Love the addition of the Type's icons above the pokemon's sprites, the pokemon's base stats being shown, and the pokemon's cry playing when their page loads up. The Shiny button toggle works as intended. The Favorite button isn't readily recognizable, but works as intended with the Favorites dropdown. I'm particularly impressed that you managed to get the pokemon like Wormadam and Giratina to display through a normal search, considering the API doesn't display them without additional input. Responsiveness works like a charm.
+    I did notice that the user can search for Pokemon from Gen 6 and beyond, but the Random function doesn't reflect this issue. I also saw that the "Mute" button doesn't mute the next Cry you hear. There's also the white space I get below the page. (As an aside, as I'm typing this the page keeps giving me random Pokemon with each keypress. I don't believe it's an issue with the code but figured I'd mention it).
+        Overall, an excellent job.
