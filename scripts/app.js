@@ -66,7 +66,21 @@ let SpecialPokemonArr = [
   "landorus",
   "basculegion",
   "dudunsparce",
-  "tatsugiri"
+  "tatsugiri",
+  "oricorio",
+  "aegislash",
+  "urshifu",
+  "zygarde",
+  "indeedee",
+  "meowstic",
+  "oinkologne",
+  "wishiwashi",
+  "gourgeist",
+  "squawkabilly",
+  "lycanroc",
+  "farfetchd",
+  "sirfetchd",
+  "type null"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -81,7 +95,21 @@ let SpecialPokemonNum = [
   "645",
   "902",
   "982",
-  "978"
+  "978",
+  "741",
+  "681",
+  "892",
+  "718",
+  "876",
+  "678",
+  "916",
+  "746",
+  "711",
+  "931",
+  "745",
+  "83",
+  "865",
+  "772"
 ]
 
 let SpecialNamesArr = [
@@ -109,7 +137,21 @@ let SpecialNamesArr = [
 "mr-rime",
 "basculegion-male",
 "dudunsparce-two-segment",
-"tatsugiri-curly"
+"tatsugiri-curly",
+"oricorio-baille",
+"aegislash-shield",
+"urshifu-single-strike",
+"zygarde-50",
+"indeedee-male",
+"meowstic-male",
+"oinkologne-male",
+"wishiwashi-solo",
+"gourgeist-average",
+"squawkabilly-green-plumage",
+"lycanroc-midday",
+"farfetchd",
+"sirfetchd",
+"type-null"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -136,7 +178,21 @@ let ScreenNameArr = [
 "Mr. Rime",
 "Basculegion",
 "Dudunsparce",
-"Tatsugiri"
+"Tatsugiri",
+"Oricorio",
+"Aegislash",
+"Urshifu",
+"Zygarde",
+"Indeedee",
+"Meowstic",
+"Oinkologne",
+"Wishiwashi",
+"Gourgeist",
+"Squawkabilly",
+"Lycanroc",
+"Farfetch'd",
+"Sirfetch'd",
+"Type: Null"
 ]
 
 let SearchBtn = document.getElementById("searchBtn");
