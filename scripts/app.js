@@ -478,13 +478,6 @@ function FamilyBtn() {
   empty(list);
   empty(Family);
   MissingNoInfo();
-  // userInput = document.getElementsByTagName("img")[0].id
-  // FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
-  // Default = "";
-  // Shiny = "";
-  // document.getElementById("shinyIcon").src = "/assets/Shiny.png";
-  // ShinyImg = true;
-  // getPokemon();
 }
 
 Search.addEventListener("keypress", async () => {
