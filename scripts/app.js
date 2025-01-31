@@ -325,15 +325,12 @@ function Types2() {
   }
 }
 
-const getPokemon = async () => {
-  EvolutionArr = [];
-  EvolutionUrlArr = [];
-  EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
-  const EvolutionChain = async () => {
+const EvolutionChain = async () => {
+  try {
     const promise = await fetch(EvolutionLink);
     const data = await promise.json();
     let EvolutionChain = data.evolution_chain.url;
-
+  
     const GetEvolutionChain = async () => {
       const promise = await fetch(EvolutionChain);
       const data = await promise.json();
@@ -393,6 +390,7 @@ const getPokemon = async () => {
             familyName.setAttribute("id", EvolutionArr[i]);
             familyName.setAttribute("onClick", "FamilyBtn()");
             Family.appendChild(familyName);
+
           };
           FinalImg();
         };
@@ -400,8 +398,44 @@ const getPokemon = async () => {
       }
     };
     GetEvolutionChain();
-  };
-  EvolutionChain();
+    
+  } catch (error) {
+    MissingNoInfo()
+  }
+};
+
+const getPokemon = async () => {
+  EvolutionArr = [];
+  EvolutionUrlArr = [];
+  EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
+  try {
+    EvolutionChain();
+  } catch (error) {
+    alert('test')
+  }
+
+  const promise = await fetch(FetchLink);
+  const data = await promise.json();
+  SpecificNames();
+  document.getElementById("pokemonImg").src =data.sprites.other.home.front_default;
+  Default = data.sprites.other.home.front_default;
+  HP.innerText = "HP: " + data.stats[0].base_stat;
+  Attack.innerText = "Attack: " + data.stats[1].base_stat;
+  Defense.innerText = "Defense: " + data.stats[2].base_stat;
+  SpAttack.innerText = "Sp.Attack: " + data.stats[3].base_stat;
+  SpDefense.innerText = "Sp.Defense: " + data.stats[4].base_stat;
+  Speed.innerText = "Speed: " + data.stats[5].base_stat;
+  Shiny = data.sprites.other.home.front_shiny;
+  ShinyImg = true;
+  FirstType = data.types[0].type.name;
+  let Location = data.location_area_encounters;
+  if (data.types.length === 2) {
+    SecondType = data.types[1].type.name;
+    Type2.hidden = false;
+    Types2();
+  } else {
+    Type2.hidden = true;
+  }
 
   function SpecificNames() {
     for(let i=0; i<SpecialNamesArr.length; i++)
@@ -415,31 +449,6 @@ const getPokemon = async () => {
         CurrentMon = ToUpper(data.name.replaceAll("-", " "));
     }
   }
-
-  const promise = await fetch(FetchLink);
-  const data = await promise.json();
-  SpecificNames();
-  document.getElementById("pokemonImg").src =
-    data.sprites.other.home.front_default;
-  Default = data.sprites.other.home.front_default;
-  HP.innerText = "HP: " + data.stats[0].base_stat;
-  Attack.innerText = "Attack: " + data.stats[1].base_stat;
-  Defense.innerText = "Defense: " + data.stats[2].base_stat;
-  SpAttack.innerText = "Sp.Attack: " + data.stats[3].base_stat;
-  SpDefense.innerText = "Sp.Defense: " + data.stats[4].base_stat;
-  Speed.innerText = "Speed: " + data.stats[5].base_stat;
-  Shiny = data.sprites.other.home.front_shiny;
-  ShinyImg = true;
-
-  FirstType = data.types[0].type.name;
-  if (data.types.length === 2) {
-    SecondType = data.types[1].type.name;
-    Type2.hidden = false;
-    Types2();
-  } else {
-    Type2.hidden = true;
-  }
-
   function AbilityCheck() {
     if (data.abilities.length == 1) {
       Ability1.innerText = ToUpper(
@@ -468,11 +477,6 @@ const getPokemon = async () => {
       Ability3.hidden = false;
     }
   }
-
-  Types1();
-  AbilityCheck();
-
-  let Location = data.location_area_encounters;
   const GetLocation = async () => {
     const promise = await fetch(Location);
     const data = await promise.json();
@@ -485,17 +489,22 @@ const getPokemon = async () => {
       );
     }
   };
-  GetLocation();
-  for (let i = 0; i < data.moves.length; i++) {
-    MoveArr.push(data.moves[i].move.name);
-    let ul = document.createElement("ul");
-    ul.innerText = ToUpper(data.moves[i].move.name.replaceAll("-", " "));
-    list.appendChild(ul);
-  }
-  function PokemonmAudio() {
+   function PokemonmAudio() {
     document.getElementById("pokemonCry").src = data.cries.latest;
     PokemonCry.play();
   }
+  function MoveFunction(){
+    for (let i = 0; i < data.moves.length; i++) {
+      MoveArr.push(data.moves[i].move.name);
+      let ul = document.createElement("ul");
+      ul.innerText = ToUpper(data.moves[i].move.name.replaceAll("-", " "));
+      list.appendChild(ul);
+    }
+  }
+  Types1();
+  AbilityCheck();
+  GetLocation();
+  MoveFunction();
   PokemonmAudio();
   IsSaved();
 };
