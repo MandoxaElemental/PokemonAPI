@@ -6,6 +6,7 @@
     <title>Pokemon API</title>
     <link rel="stylesheet" href="/src/output.css" />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="/styles/wickedcss.min.css">
     <link
       rel="icon"
       type="image/png"
@@ -14,7 +15,16 @@
     />
   </head>
   <body>
-    <div>
+    <div id="homeScreen" class="homeScreen">
+      <div class="pt-52 flex justify-center"><img src="/assets/International_Pokémon_logo.svg" alt="logo"></div>
+      <div class="home-box flex justify-center align-middle m-auto">
+        <h1>API Project</h1>
+      </div>
+      <div class="start-div flex justify-center">
+        <p id="start">Press to Start</p>
+      </div>
+    </div>
+    <div id="dex" class="hidden">
         <!-- Search Bar -->
         <div class="top-grid grid auto-cols-auto p-2.5">
           <div class="audio-grid">
@@ -119,10 +129,7 @@
     </div>
 
     <audio id="pokemonCry" src=""></audio>
-    <audio
-      id="bgMusic"
-      src=""
-    ></audio>
+    <audio id="bgMusic" src=""></audio>
     <audio id="shinyAudio" src=""></audio>
     <script type="module" src="/scripts/app.js"></script>
   </body>

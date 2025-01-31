@@ -4,6 +4,11 @@ import {
   removeFromLocalStorage,
 } from "./localstorage.js";
 
+let Home = document.getElementById("homeScreen")
+let DexMenu = document.getElementById("dex")
+
+
+
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
 let convertedNum = 0;
@@ -48,8 +53,6 @@ let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="cu
 </svg>`;
 
 document.getElementById("bgMusic").src = "/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3";
-document.getElementById("shinyAudio").src = "/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3";
-
 let Varieties = []
 
 let CurrentMon = "";
@@ -251,13 +254,23 @@ let MissingNoFamily = [
   "/assets/Ghost_I.png",
 ];
 
+let Start = document.getElementById('start')
+
+Start.className = "pulse"
+
+Home.addEventListener("click", function () {
+  Home.className = "hidden";
+  DexMenu.className = "fadeIn";
+  Music();
+  RandomPokemon();
+  document.getElementById("shinyAudio").src = "/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3";
+});
+
 BGMusic.loop = true;
 
 function Music() {
   BGMusic.play();
 }
-
-onload = Music();
 
 Mute.addEventListener("click", async () => {
   if (MuteBool === true) {
@@ -591,7 +604,7 @@ const getPokemon = async () => {
       );
     }
   };
-   function PokemonmAudio() {
+   function PokemonAudio() {
     document.getElementById("pokemonCry").src = data.cries.latest;
     PokemonCry.play();
   }
@@ -607,7 +620,7 @@ const getPokemon = async () => {
   AbilityCheck();
   GetLocation();
   MoveFunction();
-  PokemonmAudio();
+  PokemonAudio();
   IsSaved();
 };
 
@@ -672,10 +685,6 @@ SearchBtn.addEventListener("click", async () => {
   Search.value = "";
 });
 
-function ShinySound(){
-  ShinyAudio.play();
-}
-
 function ShinyFunction() {
   ShinyBtn.addEventListener("click", async () => {
     if (ShinyImg === true) {
@@ -684,8 +693,8 @@ function ShinyFunction() {
       } else {
         document.getElementById("pokemonImg").src = Shiny;
       }
+      ShinyAudio.play();
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
-      ShinySound()
       ShinyImg = false;
     } else {
       if (Name.innerText === "#000 - MissingNo.") {
@@ -719,7 +728,6 @@ function RandomPokemon() {
   EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
   getPokemon();
 }
-RandomPokemon();
 
 function MissingNoInfo() {
   Name.innerText = "#000 - MissingNo.";

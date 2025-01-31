@@ -6,6 +6,38 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.hidden{
+    display: none
+}
+
+.homeScreen{
+    color: white;
+    background-image: url('/assets/Background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    margin: 0px;
+    display: cover;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height:100%;
+    width:100%;
+}
+.home-box > h1 {
+    font-size: 55px;
+}
+
+.start-div{
+    font-size: 40px;
+}
+
+.dexClass{
+    display: none;
+}
+
 .info-grid{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
