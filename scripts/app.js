@@ -20,8 +20,10 @@ let userInput = "";
 let FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
 let PokemonID = "";
 let FinalImgFetchLink = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
+let FinalImgFetchLink2 = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
 let EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
 let ImgFetchLink = "";
+let ImgFetchLink2 = "";
 let FirstType = "";
 let SecondType = "";
 let Search = document.getElementById("search");
@@ -47,6 +49,8 @@ let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="cu
 document.getElementById("bgMusic").src = "/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3";
 document.getElementById("shinyAudio").src = "/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3";
 
+let Varieties = []
+
 let CurrentMon = "";
 
 let SpecialPokemonArr = [
@@ -61,7 +65,8 @@ let SpecialPokemonArr = [
   "thundurus",
   "landorus",
   "basculegion",
-  "dudunsparce"
+  "dudunsparce",
+  "tatsugiri"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -75,7 +80,8 @@ let SpecialPokemonNum = [
   "642",
   "645",
   "902",
-  "982"
+  "982",
+  "978"
 ]
 
 let SpecialNamesArr = [
@@ -102,7 +108,8 @@ let SpecialNamesArr = [
 "mr-mime",
 "mr-rime",
 "basculegion-male",
-"dudunsparce-two-segment"
+"dudunsparce-two-segment",
+"tatsugiri-curly"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -128,7 +135,8 @@ let ScreenNameArr = [
 "Mr. Mime",
 "Mr. Rime",
 "Basculegion",
-"Dudunsparce"
+"Dudunsparce",
+"Tatsugiri"
 ]
 
 let SearchBtn = document.getElementById("searchBtn");
@@ -344,10 +352,10 @@ function Types2() {
 
 const EvolutionChain = async () => {
   try {
+    Varieties = [];
     const promise = await fetch(EvolutionLink);
     const data = await promise.json();
     let EvolutionChain = data.evolution_chain.url;
-  
     const GetEvolutionChain = async () => {
       const promise = await fetch(EvolutionChain);
       const data = await promise.json();
@@ -358,32 +366,15 @@ const EvolutionChain = async () => {
           EvolutionArr.push(data.chain.evolves_to[i].species.name);
           EvolutionUrlArr.push(data.chain.evolves_to[i].species.url);
           if (data.chain.evolves_to[i].evolves_to.length !== 0) {
-            for (
-              let j = 0;
-              j < data.chain.evolves_to[i].evolves_to.length;
-              j++
-            ) {
-              EvolutionArr.push(
-                data.chain.evolves_to[i].evolves_to[j].species.name
-              );
-              EvolutionUrlArr.push(
-                data.chain.evolves_to[i].evolves_to[j].species.url
-              );
-              if (
-                data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0
-              ) {
-                for (
-                  let k = 0;
-                  k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length;
-                  k++
-                ) {
-                  EvolutionArr.push(
-                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
-                      .name
-                  );
-                  EvolutionUrlArr.push(
-                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
-                      .url
+            for (let j = 0; j < data.chain.evolves_to[i].evolves_to.length; j++)
+              {
+              EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].species.name);
+              EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].species.url);
+              if (data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0) {
+                for (let k = 0; k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length;k++)
+                  {
+                  EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.name);
+                  EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.url
                   );
                 }
               }
@@ -405,13 +396,51 @@ const EvolutionChain = async () => {
             familyName.src = data.sprites.other.home.front_default;
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
-            familyName.setAttribute("onClick", "FamilyBtn()");
             Family.appendChild(familyName);
           };
           FinalImg();
         };
         FamilyImg();
       }
+      const VarietyChain = async () =>{
+        for(let i=0; i<EvolutionUrlArr.length; i++){
+          let BlankUrl = EvolutionUrlArr[i]
+          const promise = await fetch(BlankUrl);
+          const data = await promise.json();
+            for(let i=1; i<data.varieties.length; i++){
+              let duplicate = false;
+              for(let j=0; j<Varieties.length; j++){
+                if(data.varieties[i].pokemon.name == Varieties[j]){
+                  duplicate = true
+                }
+              }
+              if(!duplicate){
+                Varieties.push(data.varieties[i].pokemon.url);
+              }
+          }
+        }
+        for (let i = 0; i < Varieties.length; i++) {
+          ImgFetchLink2 = Varieties[i];
+          const FamilyImg2 = async () => {
+            const promise = await fetch(ImgFetchLink2);
+            const data = await promise.json();
+            let PokemonID = data.id;
+            FinalImgFetchLink2 = `https://pokeapi.co/api/v2/pokemon/${PokemonID}`;
+            const FinalImg2 = async () => {
+              const promise = await fetch(FinalImgFetchLink2);
+              const data = await promise.json();
+              let familyName = document.createElement("img");
+              familyName.src = data.sprites.other.home.front_default;
+              familyName.setAttribute("class", "family");
+              familyName.setAttribute("id", EvolutionArr[i]);
+              Family.appendChild(familyName);
+            };
+            FinalImg2();
+          };
+          FamilyImg2();
+        }
+      }
+      VarietyChain()
     };
     GetEvolutionChain();
     
@@ -558,11 +587,11 @@ function SearchFunction() {
   }
 }
 
-function FamilyBtn() {
-  empty(list);
-  empty(Family);
-  MissingNoInfo();
-}
+// function FamilyBtn() {
+//   empty(list);
+//   empty(Family);
+//   MissingNoInfo();
+// }
 
 Search.addEventListener("keypress", async () => {
   if (event.key === "Enter") {
@@ -750,5 +779,5 @@ PokemonImg.addEventListener('click', async () => {
 })
 
 function ExtendedFamily(){
-  
+    
 }
