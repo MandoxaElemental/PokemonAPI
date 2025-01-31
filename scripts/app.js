@@ -390,7 +390,6 @@ const EvolutionChain = async () => {
             familyName.setAttribute("id", EvolutionArr[i]);
             familyName.setAttribute("onClick", "FamilyBtn()");
             Family.appendChild(familyName);
-
           };
           FinalImg();
         };
