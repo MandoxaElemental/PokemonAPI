@@ -116,7 +116,7 @@ Mute.addEventListener("click", async () => {
     document.getElementById("audioOn").src = "assets/volume-mute-fill.svg";
     MuteBool = false;
   } else if (MuteBool === false) {
-    BGMusic.play();
+    Music();
     MuteBool = true;
     document.getElementById("audioOn").src = "assets/volume-down-fill.svg";
   }
