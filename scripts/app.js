@@ -1,4 +1,8 @@
-import { saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js";
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "./localstorage.js";
 
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
@@ -32,20 +36,20 @@ let ShinyAudio = document.getElementById("shinyAudio");
 let RandomNum = Math.floor(Math.random() * 650);
 let Mute = document.getElementById("mute");
 let MuteBool = true;
-let SavedList = document.getElementById("savedBtn")
-let DropdownContent = document.getElementById("dropdownContent")
-let storedValue = document.getElementById("storedValue")
+let SavedList = document.getElementById("savedBtn");
+let DropdownContent = document.getElementById("dropdownContent");
+let storedValue = document.getElementById("storedValue");
 let X = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-</svg>`
+</svg>`;
 
-let CurrentMon = ""
-let SavedBool = true
+let CurrentMon = "";
 
 let SearchBtn = document.getElementById("searchBtn");
 let RandomBtn = document.getElementById("randomBtn");
-let SaveBtn = document.getElementById("savedPokemon")
+let SaveBtn = document.getElementById("savedPokemon");
+let SaveBool = true;
 
 let HP = document.getElementById("HP");
 let Attack = document.getElementById("Attack");
@@ -54,9 +58,48 @@ let SpAttack = document.getElementById("SpAttack");
 let SpDefense = document.getElementById("SpDefense");
 let Speed = document.getElementById("Speed");
 
-let MissingNoArr = ["Mega Punch", "Razor Wind", "Swords Dance", "Mega Kick", "Toxic", "Take Down", "Double-Edge", "Bubble Beam", "Ice Beam", "Blizzard", "Submission", "Seismic Toss", "Rage", "Thunder", "Earthquake", "Fissure", "Psychic", "Teleport", "Sky Attack", "Rest", "Thunder Wave", "Tri Attack", "Substitute", "Cut", "Fly", "Pay Day", "Bind", "Water Gun"]
-let MissingNoLocation = ["Old Man Glitch", "Mew Glitch", "Time Capsule Exploit"]
-let MissingNoFamily = ["/assets/Missingno_RB.png", "/assets/Missingno_Y.png", "/assets/Spr_1b_142_f.png", "/assets/Spr_1b_141_f.png", "/assets/Ghost_I.png"]
+let MissingNoArr = [
+  "Mega Punch",
+  "Razor Wind",
+  "Swords Dance",
+  "Mega Kick",
+  "Toxic",
+  "Take Down",
+  "Double-Edge",
+  "Bubble Beam",
+  "Ice Beam",
+  "Blizzard",
+  "Submission",
+  "Seismic Toss",
+  "Rage",
+  "Thunder",
+  "Earthquake",
+  "Fissure",
+  "Psychic",
+  "Teleport",
+  "Sky Attack",
+  "Rest",
+  "Thunder Wave",
+  "Tri Attack",
+  "Substitute",
+  "Cut",
+  "Fly",
+  "Pay Day",
+  "Bind",
+  "Water Gun",
+];
+let MissingNoLocation = [
+  "Old Man Glitch",
+  "Mew Glitch",
+  "Time Capsule Exploit",
+];
+let MissingNoFamily = [
+  "/assets/Missingno_RB.png",
+  "/assets/Missingno_Y.png",
+  "/assets/Spr_1b_142_f.png",
+  "/assets/Spr_1b_141_f.png",
+  "/assets/Ghost_I.png",
+];
 
 BGMusic.loop = true;
 
@@ -233,15 +276,33 @@ const getPokemon = async () => {
           EvolutionArr.push(data.chain.evolves_to[i].species.name);
           EvolutionUrlArr.push(data.chain.evolves_to[i].species.url);
           if (data.chain.evolves_to[i].evolves_to.length !== 0) {
-            for (let j = 0; j < data.chain.evolves_to[i].evolves_to.length; j++) 
-              {
-              EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].species.name);
-              EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].species.url);
-              if (data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0) 
-              {
-                for (let k = 0; k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length; k++) {
-                  EvolutionArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.name);
-                  EvolutionUrlArr.push(data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species.url);
+            for (
+              let j = 0;
+              j < data.chain.evolves_to[i].evolves_to.length;
+              j++
+            ) {
+              EvolutionArr.push(
+                data.chain.evolves_to[i].evolves_to[j].species.name
+              );
+              EvolutionUrlArr.push(
+                data.chain.evolves_to[i].evolves_to[j].species.url
+              );
+              if (
+                data.chain.evolves_to[i].evolves_to[j].evolves_to.length !== 0
+              ) {
+                for (
+                  let k = 0;
+                  k < data.chain.evolves_to[i].evolves_to[j].evolves_to.length;
+                  k++
+                ) {
+                  EvolutionArr.push(
+                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
+                      .name
+                  );
+                  EvolutionUrlArr.push(
+                    data.chain.evolves_to[i].evolves_to[j].evolves_to[k].species
+                      .url
+                  );
                 }
               }
             }
@@ -262,7 +323,7 @@ const getPokemon = async () => {
             familyName.src = data.sprites.other.home.front_default;
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
-            familyName.setAttribute("onClick", "FamilyBtn()")
+            familyName.setAttribute("onClick", "FamilyBtn()");
             Family.appendChild(familyName);
           };
           FinalImg();
@@ -274,36 +335,37 @@ const getPokemon = async () => {
   };
   EvolutionChain();
 
-  function SpecificNames(){
-    if(data.name === "ho-oh" || data.name === "250"){
-        Name.innerText = "#" + data.id + " - Ho-oh"
-    } else if (data.name === "porygon-z"  || data.name === "474"){
-        Name.innerText = "#" + data.id + " - Porygon-Z"
-    } else if (data.name === "jangmo-o" || data.name === "782"){
-        Name.innerText = "#" + data.id + " - Jangmo-o"
-    } else if (data.name === "hakamo-o" || data.name === "783"){
-        Name.innerText = "#" + data.id + " - Hakamo-o"
-    } else if (data.name === "kommo-o" || data.name === "784"){
-        Name.innerText = "#" + data.id + " - Kommo-o"
-    } else if (data.name === "wo-chien" || data.name === "1001"){
-        Name.innerText = "#" + data.id + " - Wo-Chien"
-    } else if (data.name === "chien-pao" || data.name === "1002"){
-        Name.innerText = "#" + data.id + " - Chien-Pao"
-    } else if (data.name === "ting-lu" || data.name === "1003"){
-        Name.innerText = "#" + data.id + " - Ting-Lu"
-    } else if (data.name === "chi-yu" || data.name === "1004"){
-        Name.innerText = "#" + data.id + " - Chi-Yu"
+  function SpecificNames() {
+    if (data.name === "ho-oh" || data.name === "250") {
+      Name.innerText = "#" + data.id + " - Ho-oh";
+    } else if (data.name === "porygon-z" || data.name === "474") {
+      Name.innerText = "#" + data.id + " - Porygon-Z";
+    } else if (data.name === "jangmo-o" || data.name === "782") {
+      Name.innerText = "#" + data.id + " - Jangmo-o";
+    } else if (data.name === "hakamo-o" || data.name === "783") {
+      Name.innerText = "#" + data.id + " - Hakamo-o";
+    } else if (data.name === "kommo-o" || data.name === "784") {
+      Name.innerText = "#" + data.id + " - Kommo-o";
+    } else if (data.name === "wo-chien" || data.name === "1001") {
+      Name.innerText = "#" + data.id + " - Wo-Chien";
+    } else if (data.name === "chien-pao" || data.name === "1002") {
+      Name.innerText = "#" + data.id + " - Chien-Pao";
+    } else if (data.name === "ting-lu" || data.name === "1003") {
+      Name.innerText = "#" + data.id + " - Ting-Lu";
+    } else if (data.name === "chi-yu" || data.name === "1004") {
+      Name.innerText = "#" + data.id + " - Chi-Yu";
     } else {
-    Name.innerText = "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
+      Name.innerText =
+        "#" + data.id + " - " + ToUpper(data.name.replaceAll("-", " "));
     }
-    }
-    
+  }
+
   const promise = await fetch(FetchLink);
   const data = await promise.json();
   console.log(data);
   SpecificNames();
   document.getElementById("pokemonImg").src =
-  data.sprites.other.home.front_default;
+    data.sprites.other.home.front_default;
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
   Attack.innerText = "Attack: " + data.stats[1].base_stat;
@@ -382,7 +444,7 @@ const getPokemon = async () => {
   PokemonmAudio();
 
   CurrentMon = ToUpper(data.name.replaceAll("-", " "));
-  console.log(CurrentMon)
+  console.log(CurrentMon);
   IsSaved();
 };
 
@@ -402,20 +464,20 @@ function SearchFunction() {
   empty(Family);
 
   try {
-    getPokemon()
+    getPokemon();
   } catch (error) {
-    MissingNoInfo()
+    MissingNoInfo();
   }
 
-  if(userInput === "" || userInput === "0"){
-    MissingNoInfo()
+  if (userInput === "" || userInput === "0") {
+    MissingNoInfo();
   }
 }
 
 function FamilyBtn() {
   empty(list);
   empty(Family);
-  MissingNoInfo()
+  MissingNoInfo();
   // userInput = document.getElementsByTagName("img")[0].id
   // FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
   // Default = "";
@@ -423,39 +485,37 @@ function FamilyBtn() {
   // document.getElementById("shinyIcon").src = "/assets/Shiny.png";
   // ShinyImg = true;
   // getPokemon();
-};
+}
 
 Search.addEventListener("keypress", async () => {
   if (event.key === "Enter") {
-      SearchFunction();
-      Search.value = ""
+    SearchFunction();
+    Search.value = "";
   }
 });
 
 SearchBtn.addEventListener("click", async () => {
-    SearchFunction();
-    Search.value = ""
+  SearchFunction();
+  Search.value = "";
 });
 
 function ShinyFunction() {
   ShinyBtn.addEventListener("click", async () => {
     if (ShinyImg === true) {
-      if(Name.innerText === "#000 - MissingNo.")
-        {
-          document.getElementById("pokemonImg").src = "/assets/Ketsuban.png";
-        }else{
-          document.getElementById("pokemonImg").src = Shiny;
-        }
+      if (Name.innerText === "#000 - MissingNo.") {
+        document.getElementById("pokemonImg").src = "/assets/Ketsuban.png";
+      } else {
+        document.getElementById("pokemonImg").src = Shiny;
+      }
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
-      ShinyAudio.play()
+      ShinyAudio.play();
       ShinyImg = false;
     } else {
-      if(Name.innerText === "#000 - MissingNo.")
-        {
-          document.getElementById("pokemonImg").src = "/assets/Missingno_RB.png";
-        } else {
-          document.getElementById("pokemonImg").src = Default;
-        }
+      if (Name.innerText === "#000 - MissingNo.") {
+        document.getElementById("pokemonImg").src = "/assets/Missingno_RB.png";
+      } else {
+        document.getElementById("pokemonImg").src = Default;
+      }
       document.getElementById("shinyIcon").src = "/assets/Shiny.png";
       ShinyImg = true;
     }
@@ -484,62 +544,64 @@ function RandomPokemon() {
 }
 RandomPokemon();
 
-
-function MissingNoInfo(){
+function MissingNoInfo() {
   Name.innerText = "#000 - MissingNo.";
   document.getElementById("pokemonImg").src = "/assets/Missingno_RB.png";
-  HP.innerText = "HP: 33"
-  Attack.innerText = "Attack: 136"
-  Defense.innerText = "Defense: 0"
-  SpAttack.innerText = "Sp.Attack: 6"
-  SpDefense.innerText = "Sp.Defense: 0"
-  Speed.innerText = "Speed: 29"
-  Ability1.innerText = "N/A"
+  HP.innerText = "HP: 33";
+  Attack.innerText = "Attack: 136";
+  Defense.innerText = "Defense: 0";
+  SpAttack.innerText = "Sp.Attack: 6";
+  SpDefense.innerText = "Sp.Defense: 0";
+  Speed.innerText = "Speed: 29";
+  Ability1.innerText = "N/A";
   Ability2.hidden = true;
   Ability3.hidden = true;
   LocationInfo.innerText = "N/A";
   document.getElementById("type").src = "/assets/pokemonTypes/Normal.png";
   Type2.hidden = true;
+  CurrentMon = "0";
 
   for (let i = 0; i < MissingNoArr.length; i++) {
     MoveArr.push(MissingNoArr[i]);
     let ul = document.createElement("ul");
-    ul.innerText = MissingNoArr[i]
+    ul.innerText = MissingNoArr[i];
     list.appendChild(ul);
   }
 
-  let LocationNum = Math.floor(Math.random() * MissingNoLocation.length)
-  LocationInfo.innerText = MissingNoLocation[LocationNum]
+  let LocationNum = Math.floor(Math.random() * MissingNoLocation.length);
+  LocationInfo.innerText = MissingNoLocation[LocationNum];
 
   document.getElementById("pokemonCry").src = "/assets/audio/MissingNoCry.wav";
-    PokemonCry.play();
+  PokemonCry.play();
 
-    for(let i=0; i < MissingNoFamily.length; i++){
-      let familyName = document.createElement("img");
-      familyName.src = MissingNoFamily[i];
-      familyName.setAttribute("class", "family");
-      familyName.setAttribute("id", EvolutionArr[i]);
-      Family.appendChild(familyName);
-    }
+  for (let i = 0; i < MissingNoFamily.length; i++) {
+    let familyName = document.createElement("img");
+    familyName.src = MissingNoFamily[i];
+    familyName.setAttribute("class", "family");
+    familyName.setAttribute("id", EvolutionArr[i]);
+    Family.appendChild(familyName);
+  }
 }
 
-function IsSaved(){
-  if(getFromLocalStorage().includes(CurrentMon)){
-    document.getElementById("savedPokemon").src = "/assets/2Active.svg"
-  }  else {
-    document.getElementById("savedPokemon").src = "/assets/2.svg"
+function IsSaved() {
+  if (getFromLocalStorage().includes(CurrentMon)) {
+    document.getElementById("savedPokemon").src = "/assets/2Active.svg";
+  } else {
+    document.getElementById("savedPokemon").src = "/assets/2.svg";
   }
 }
 
 SaveBtn.addEventListener("click", async () => {
-  if(getFromLocalStorage().includes(CurrentMon)){
-    document.getElementById("savedPokemon").src = "/assets/2.svg"
-    removeFromLocalStorage(CurrentMon)
-    createElements()
-  }  else {
-    document.getElementById("savedPokemon").src = "/assets/2Active.svg"
-    saveToLocalStorage(CurrentMon)
-    createElements()
+  if (getFromLocalStorage().includes(CurrentMon)) {
+    document.getElementById("savedPokemon").src = "/assets/2.svg";
+    SaveBool = true
+    removeFromLocalStorage(CurrentMon);
+    createElements();
+  } else {
+    document.getElementById("savedPokemon").src = "/assets/2Active.svg";
+    SaveBool = false
+    saveToLocalStorage(CurrentMon);
+    createElements();
   }
 });
 
@@ -550,33 +612,55 @@ SavedList.addEventListener("click", async () => {
   } else {
     DropdownContent.style.display = "none";
   }
-})
+});
 
 function createElements() {
   let LocalPokemon = getFromLocalStorage();
-  storedValue.innerHTML= "";
-  
-  LocalPokemon.map(SavedPokemonList => {
-      let p = document.createElement('p');
-      p.className = "savedPokemon";
-      p.textContent = SavedPokemonList;
-      //p.setAttribute("onClick", `${SavedPokemonFunction()}`)
+  storedValue.innerHTML = "";
 
-      let deletebtn = document.createElement('button');
-      deletebtn.type = 'button';
-      deletebtn.className = "removePokemon";
-      deletebtn.innerHTML = X
+  LocalPokemon.map((SavedPokemonList) => {
+    let p = document.createElement("p");
+    p.className = "yourSaved";
+    p.textContent = SavedPokemonList;
+    p.setAttribute("id", SavedPokemonList);
+    //p.setAttribute("onClick", `${SavedPokemonFunction()}`)
 
-      deletebtn.addEventListener('click', function () {
-          removeFromLocalStorage(SavedPokemonList);
-          p.remove();
-          if(CurrentMon === p){
-            document.getElementById("savedPokemon").src = "/assets/active2.svg"
-          }
-      });
+    let deletebtn = document.createElement("button");
+    deletebtn.type = "button";
+    deletebtn.className = "removePokemon";
+    deletebtn.innerHTML = X;
 
-      p.appendChild(deletebtn);
+    deletebtn.addEventListener("click", async () => {
+      
+      removeFromLocalStorage(SavedPokemonList);
+      p.remove();
+    });
 
-      storedValue.appendChild(p);
+    p.appendChild(deletebtn);
+
+    storedValue.appendChild(p);
   });
-};
+
+  let entries = document.getElementsByClassName("yourSaved");
+  for (let i = 0; i < entries.length; i++) {
+      entries[i].addEventListener("click", function (e) {
+        userInput = entries[i].textContent;
+        FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+        EvolutionLink = `https://pokeapi.co/api/v2/pokemon-species/${userInput}`;
+        Default = "";
+        Shiny = "";
+        document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+        ShinyImg = true;
+        empty(list);
+        empty(Family);
+        getPokemon();
+      });
+  }
+}
+
+DropdownContent.addEventListener("mouseover", async () => {
+  DropdownContent.style.display = "block";
+});
+DropdownContent.addEventListener("mouseout", async () => {
+  DropdownContent.style.display = "none";
+});

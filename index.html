@@ -17,9 +17,11 @@
     <div>
         <!-- Search Bar -->
         <div class="grid auto-cols-auto p-2.5">
+          <div>
             <button id="mute">
               <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
             </button>
+          </div>
             <div class="searchBar">
                 <button class="randomBtn rounded-l-md searchBtn" id="randomBtn">
                     <img src="/assets/dice-5.svg" alt="random">
@@ -33,7 +35,7 @@
             <button class="savedBtn flex justify-end">
                 <img id="savedBtn" src="/assets/2.png" alt="search" />
               </button>
-              <div id="dropdownContent" class="bg-white rounded-xl dropdownContent">
+              <div id="dropdownContent" class="bg-white rounded-xl dropdownContent" style="display: none">
                 <h1 class="text-3xl topBarSaved flex justify-center align-middle rounded-t-xl font-bold">Saved</h1>
                 <div id="savedList" class="moveList gap-2.5 p-5">
                   <div id="storedValue" class="text-center">
@@ -45,15 +47,15 @@
       <div class="topBar flex justify-center p-3">
           <h1 class="text-3xl font-bold" id="name">Name</h1>
       </div>
-
-      <div class="grid grid-cols-3 m-15 mt-3 gap-2.5">
-        <div class="p-2.5">
+<!-- Pokemon Info -->
+      <div class="grid grid-cols-2 md:grid-cols-3  m-15 mt-3 gap-2.5">
+        <div class="p-3 mainImg">
           <div class="flex justify-evenly">
             <img id="type" src="" alt="type1" />
             <img id="type2" src="" alt="type2" />
           </div>
           <div class="flex justify-center">
-              <div class="mainImg">
+              <div class>
                   <img width="200px" id="pokemonImg" src="" alt="Pokemon" />
               </div>
             </div>
@@ -85,7 +87,7 @@
         <!-- Stats -->
         <div id="statsDiv">
             <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Stats</h1>
-            <div class="grid grid-cols-2 background rounded-xl text-lg text-center moveList p-5">
+            <div class="grid grid-cols-2 background rounded-xl text-md text-center moveList p-5">
                 <div>
                     <p id="HP"></p>
                     <p id="Attack"></p>

@@ -2,12 +2,19 @@ body{
     background-image: url('/assets/Background.png');
     background-repeat: no-repeat;
     background-size: cover;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.responsive-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+ }
 
 .mainImg{
     background-image: url(/assets/pokeball-pokemon-catch.svg);
     background-repeat: no-repeat;
+    background-size: 250px;
+    background-position: center;
+
 }
 
 .moveList{
@@ -89,7 +96,6 @@ input{
 }
 
 .dropdownContent {
-    display: none;
     position: absolute;
     overflow: auto;
     right: 0;
@@ -110,5 +116,15 @@ input{
 #savedList{
     max-height: 250px;
     overflow: scroll;
-    font-size: 20px
+    font-size: 20px;
+    font-weight: bold;
+}
+@media (width:768px){
+ .responsive-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+ }
+ .infoBox{
+    grid-column: 2/3;
+    background-color: rgba(255, 255, 255, 0.463);
+}
 }
