@@ -6,6 +6,11 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+#logo{
+    max-height: 200px;
+    width: auto;
+}
+
 .hidden{
     display: none
 }

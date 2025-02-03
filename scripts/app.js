@@ -84,7 +84,8 @@ let SpecialPokemonArr = [
   "lycanroc",
   "farfetchd",
   "sirfetchd",
-  "type null"
+  "type null",
+  "toxtricity"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -113,7 +114,8 @@ let SpecialPokemonNum = [
   "745",
   "83",
   "865",
-  "772"
+  "772",
+  "849"
 ]
 
 let SpecialNamesArr = [
@@ -155,7 +157,8 @@ let SpecialNamesArr = [
 "lycanroc-midday",
 "farfetchd",
 "sirfetchd",
-"type-null"
+"type-null",
+"toxtricity-amped"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -196,7 +199,8 @@ let ScreenNameArr = [
 "Lycanroc",
 "Farfetch'd",
 "Sirfetch'd",
-"Type: Null"
+"Type: Null",
+"Toxtricity"
 ]
 
 let SearchBtn = document.getElementById("searchBtn");
@@ -263,6 +267,7 @@ Home.addEventListener("click", function () {
   DexMenu.className = "fadeIn";
   Music();
   RandomPokemon();
+  document.getElementById("bgMusic").loop = true;
   document.getElementById("shinyAudio").src = "/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3";
 });
 
@@ -500,7 +505,11 @@ const EvolutionChain = async () => {
               const promise = await fetch(FinalImgFetchLink2);
               const data = await promise.json();
               let familyName = document.createElement("img");
-              familyName.src = data.sprites.other.home.front_default;
+              if(data.sprites.other.home.front_default === null){
+                familyName.src = "/assets/pokeball-pokemon-catch.svg"
+              } else {
+                familyName.src = data.sprites.other.home.front_default;
+              }
               familyName.setAttribute("class", "family");
               familyName.setAttribute("id", EvolutionArr[i]);
               Family.appendChild(familyName);
@@ -532,6 +541,7 @@ const getPokemon = async () => {
   const promise = await fetch(FetchLink);
   const data = await promise.json();
   SpecificNames();
+  let DexNum = Number(data.id)
   document.getElementById("pokemonImg").src =data.sprites.other.home.front_default;
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
@@ -597,7 +607,11 @@ const getPokemon = async () => {
     const data = await promise.json();
     let LocationNum = Math.floor(Math.random() * data.length);
     if (data.length === 0) {
-      LocationInfo.innerText = "N/A";
+      if(DexNum >= 984 && DexNum < 996){
+        LocationInfo.innerText = "Area Zero"
+      } else {
+        LocationInfo.innerText = "N/A";
+      }
     } else {
       LocationInfo.innerText = ToUpper(
         data[LocationNum].location_area.name.replaceAll("-", " ")
@@ -644,7 +658,7 @@ function SpecificSearches(){
 function NumberCheck(){
   convertedNum = Number(userInput);
   if (convertedNum >= 0){
-    if(convertedNum > 649){
+    if(convertedNum > 1025){
       userInput = "0"
     }
   }
@@ -710,7 +724,7 @@ function ShinyFunction() {
 ShinyFunction();
 
 RandomBtn.addEventListener("click", async () => {
-  RandomNum = Math.floor(Math.random() * 650);
+  RandomNum = Math.floor(Math.random() * 1026);
   userInput = RandomNum;
   FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
   Default = "";
