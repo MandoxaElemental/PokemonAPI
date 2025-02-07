@@ -305,58 +305,58 @@ function ToUpper(input) {
 function Types1() {
   switch (FirstType) {
     case "normal":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Normal.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Normal.png";
       break;
     case "fighting":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Fighting.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Fighting.png";
       break;
     case "flying":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Flying.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Flying.png";
       break;
     case "poison":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Poison.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Poison.png";
       break;
     case "ground":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Ground.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Ground.png";
       break;
     case "rock":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Rock.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Rock.png";
       break;
     case "bug":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Bug.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Bug.png";
       break;
     case "ghost":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Ghost.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Ghost.png";
       break;
     case "steel":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Steel.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Steel.png";
       break;
     case "fire":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Fire.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Fire.png";
       break;
     case "water":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Water.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Water.png";
       break;
     case "grass":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Grass.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Grass.png";
       break;
     case "electric":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Electric.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Electric.png";
       break;
     case "psychic":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Psychic.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Psychic.png";
       break;
     case "ice":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Ice.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Ice.png";
       break;
     case "dragon":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Dragon.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Dragon.png";
       break;
     case "dark":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Dark.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Dark.png";
       break;
     case "fairy":
-      document.getElementById("type").src = "/public/assets/pokemonTypes/Fairy.png";
+      document.getElementById("type").src = "./public/assets/pokemonTypes/Fairy.png";
       break;
     default:
       break;
@@ -365,58 +365,58 @@ function Types1() {
 function Types2() {
   switch (SecondType) {
     case "normal":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Normal.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Normal.png";
       break;
     case "fighting":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Fighting.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Fighting.png";
       break;
     case "flying":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Flying.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Flying.png";
       break;
     case "poison":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Poison.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Poison.png";
       break;
     case "ground":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Ground.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Ground.png";
       break;
     case "rock":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Rock.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Rock.png";
       break;
     case "bug":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Bug.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Bug.png";
       break;
     case "ghost":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Ghost.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Ghost.png";
       break;
     case "steel":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Steel.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Steel.png";
       break;
     case "fire":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Fire.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Fire.png";
       break;
     case "water":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Water.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Water.png";
       break;
     case "grass":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Grass.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Grass.png";
       break;
     case "electric":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Electric.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Electric.png";
       break;
     case "psychic":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Psychic.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Psychic.png";
       break;
     case "ice":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Ice.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Ice.png";
       break;
     case "dragon":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Dragon.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Dragon.png";
       break;
     case "dark":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Dark.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Dark.png";
       break;
     case "fairy":
-      document.getElementById("type2").src = "/public/assets/pokemonTypes/Fairy.png";
+      document.getElementById("type2").src = "./public/assets/pokemonTypes/Fairy.png";
       break;
     case "":
       Type2.hidden = true;
@@ -759,7 +759,7 @@ function MissingNoInfo() {
   Ability2.hidden = true;
   Ability3.hidden = true;
   LocationInfo.innerText = "N/A";
-  document.getElementById("type").src = "/public/assets/pokemonTypes/Normal.png";
+  document.getElementById("type").src = "./public/assets/pokemonTypes/Normal.png";
   Type2.hidden = true;
   CurrentMon = "0";
 
