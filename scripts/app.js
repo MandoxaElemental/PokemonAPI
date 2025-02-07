@@ -277,13 +277,13 @@ Mute.addEventListener("click", async () => {
   if (MuteBool === true) {
     BGMusic.pause();
     BGMusic.currentTime = 0;
-    document.getElementById("audioOn").src = "/public/assets/volume-mute-fill.svg";
+    document.getElementById("audioOn").src = "/assets/volume-mute-fill.svg";
     MuteBool = false;
     PokemonAudioBool = false;
   } else if (MuteBool === false) {
     Music();
     MuteBool = true;
-    document.getElementById("audioOn").src = "/public/assets/volume-down-fill.svg";
+    document.getElementById("audioOn").src = "/assets/volume-down-fill.svg";
     PokemonAudioBool = true;
   }
 });
@@ -698,7 +698,9 @@ function ShinyFunction() {
       } else {
         document.getElementById("pokemonImg").src = Shiny;
       }
-      ShinyAudio.play();
+      if(PokemonAudioBool === true){
+        ShinyAudio.play();
+      }
       document.getElementById("shinyIcon").src = "/assets/ShinyActive.png";
       ShinyImg = false;
     } else {
