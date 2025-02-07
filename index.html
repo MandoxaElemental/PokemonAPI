@@ -11,41 +11,41 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/public/assets/2.svg"
+      href="./assets/2.svg"
     />
   </head>
   <body>
     <div id="homeScreen" class="homeScreen">
-      <div class="pt-16 flex justify-center px-2.5">
-        <img id="logo" src="/public/assets/Pokémon_logo.png" alt="Pokemon Logo">
+        <div class="pt-16 flex justify-center px-2.5">
+          <img id="logo" src="/assets/Pokémon_logo.png" alt="Pokemon Logo">
+        </div>
+        <div class="home-box flex justify-center text-center m-auto px-2.5">
+          <h1>API Project</h1>
+        </div>
+        <div class="start-div flex justify-center">
+          <p id="start">Press to Start</p>
+        </div>
       </div>
-      <div class="home-box flex justify-center text-center m-auto px-2.5">
-        <h1>API Project</h1>
-      </div>
-      <div class="start-div flex justify-center">
-        <p id="start">Press to Start</p>
-      </div>
-    </div>
     <div id="dex" class="hidden">
         <!-- Search Bar -->
         <div class="top-grid grid auto-cols-auto p-2.5">
           <div class="audio-grid">
             <button id="mute">
-              <img id="audioOn" src="/public/assets/volume-down-fill.svg" alt="audio" />
+              <img id="audioOn" src="/assets/volume-down-fill.svg" alt="audio" />
             </button>
           </div>
             <div class="searchBar">
                 <button class="randomBtn rounded-l-md searchBtn" id="randomBtn">
-                    <img src="/public/assets/dice-5.svg" alt="random">
+                    <img src="/assets/dice-5.svg" alt="random">
                 </button>
                 <input class="text-xl" id="search" placeholder="Search" type="text" />
                 <button class="searchBtn rounded-r-md">
-                  <img id="searchBtn" src="/public/assets/search.svg" alt="search" />
+                  <img id="searchBtn" src="/assets/search.svg" alt="search" />
                 </button>
             </div>
             
             <button class="savedBtn flex justify-end">
-                <img id="savedBtn" src="/public/assets/2.png" alt="search" />
+                <img id="savedBtn" src="/assets/2.png" alt="search" />
               </button>
               <div id="dropdownContent" class="bg-white rounded-xl dropdownContent" style="display: none">
                 <h1 class="text-3xl topBarSaved flex justify-center align-middle rounded-t-xl font-bold">Saved</h1>
@@ -60,7 +60,7 @@
           <h1 class="text-3xl font-bold" id="name">Name</h1>
       </div>
 <!-- Pokemon Info -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  sm:m-10 m-0 mt-3 mb-5 gap-2.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  sm:m-15 m-0 mt-3 mb-5 gap-2.5">
         <div class="p-3 mainImg">
           <div class="flex justify-evenly pb-2">
             <img id="type" src="" alt="type1" />
@@ -73,7 +73,7 @@
             </div>
             <div>
                 <button id="shiny">
-                    <img id="shinyIcon" src="/public/assets/Shiny.png" alt="shiny" />
+                    <img id="shinyIcon" src="/assets/Shiny.png" alt="shiny" />
                 </button>
             </div>
         </div>
@@ -81,7 +81,7 @@
         <!-- Info -->
         <div class="infoBox text-center rounded-xl">
             <div class="topBar rounded-t-xl grid-cols-3 grid">
-                <img class="notSaved" id="savedPokemon" src="/public/assets/2.svg" alt="saved">
+                <img class="notSaved" id="savedPokemon" src="/assets/2.svg" alt="saved">
                 <h1 class="text-3xl font-bold">Info</h1>
             </div>
             <div class="p-2.5">
@@ -131,8 +131,8 @@
     </div>
 
     <audio id="pokemonCry" src=""></audio>
-    <audio id="bgMusic" src="/public/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3"></audio>
-    <audio id="shinyAudio" src="/public/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3"></audio>
+    <audio id="bgMusic" src="/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3"></audio>
+    <audio id="shinyAudio" src="/assets/audio/Gen 9 Shiny Sparkle Sound Effect - Pokémon Scarlet and Violet [ ezmp3.cc ].mp3"></audio>
     <script type="module" src="/scripts/app.js"></script>
   </body>
 </html>
