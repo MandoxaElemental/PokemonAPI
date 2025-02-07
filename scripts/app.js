@@ -41,7 +41,7 @@ let Family = document.getElementById("family");
 let list = document.getElementById("list");
 let BGMusic = document.getElementById("bgMusic");
 let ShinyAudio = document.getElementById("shinyAudio");
-let RandomNum = Math.floor(Math.random() * 650);
+let RandomNum = Math.floor(Math.random() * 1026);
 let Mute = document.getElementById("mute");
 let MuteBool = true;
 let SavedList = document.getElementById("savedBtn");
@@ -84,7 +84,8 @@ let SpecialPokemonArr = [
   "lycanroc",
   "farfetchd",
   "sirfetchd",
-  "type null"
+  "type null",
+  "toxtricity"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -113,7 +114,8 @@ let SpecialPokemonNum = [
   "745",
   "83",
   "865",
-  "772"
+  "772",
+  "849"
 ]
 
 let SpecialNamesArr = [
@@ -155,7 +157,8 @@ let SpecialNamesArr = [
 "lycanroc-midday",
 "farfetchd",
 "sirfetchd",
-"type-null"
+"type-null",
+"toxtricity-amped"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -196,7 +199,8 @@ let ScreenNameArr = [
 "Lycanroc",
 "Farfetch'd",
 "Sirfetch'd",
-"Type: Null"
+"Type: Null",
+"Toxtricity"
 ]
 
 let SearchBtn = document.getElementById("searchBtn");
@@ -617,6 +621,8 @@ const getPokemon = async () => {
     for (let i = 0; i < data.moves.length; i++) {
       MoveArr.push(data.moves[i].move.name);
       let ul = document.createElement("ul");
+      ul.setAttribute("class", "moves");
+      ul.setAttribute("onclick", "Alert()");
       ul.innerText = ToUpper(data.moves[i].move.name.replaceAll("-", " "));
       list.appendChild(ul);
     }
@@ -649,7 +655,7 @@ function SpecificSearches(){
 function NumberCheck(){
   convertedNum = Number(userInput);
   if (convertedNum >= 0){
-    if(convertedNum > 649){
+    if(convertedNum > 1025){
       userInput = "0"
     }
   }

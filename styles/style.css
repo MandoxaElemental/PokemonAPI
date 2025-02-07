@@ -87,6 +87,9 @@ body{
 #family > img{
     width: 150px;
 }
+#family > img:hover{
+    opacity: 70%;
+}
 
 input{
     background-color: rgba(255, 255, 255, 0.463);
@@ -168,6 +171,11 @@ input{
     font-size: 20px;
     font-weight: bold;
 }
+
+.moves:hover{
+    opacity: 60%;
+}
+
 @media (max-width:768px){
     .responsive-grid{
         grid-template-columns: repeat(2, minmax(0, 1fr));
