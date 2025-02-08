@@ -52,6 +52,8 @@ let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="cu
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg>`;
 
+let OfficialArtWork = "official-artwork"
+
 document.getElementById("bgMusic").src = "/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3";
 let Varieties = []
 
@@ -117,7 +119,6 @@ let SpecialPokemonNum = [
   "772",
   "849"
 ]
-
 let SpecialNamesArr = [
 "ho-oh",
 "porygon-z",
@@ -202,6 +203,10 @@ let ScreenNameArr = [
 "Type: Null",
 "Toxtricity"
 ]
+
+let Previous = document.getElementById("previous");
+let Next = document.getElementById("next");
+let CurrentNum = 0
 
 let SearchBtn = document.getElementById("searchBtn");
 let RandomBtn = document.getElementById("randomBtn");
@@ -470,7 +475,11 @@ const EvolutionChain = async () => {
             const promise = await fetch(FinalImgFetchLink);
             const data = await promise.json();
             let familyName = document.createElement("img");
-            familyName.src = data.sprites.other.home.front_default;
+            if(data.sprites.other.home.front_default === null){
+                familyName.src = "/assets/pokeball-pokemon-catch.svg"
+              } else {
+                familyName.src = data.sprites.other.home.front_default;
+              }
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
             Family.appendChild(familyName);
@@ -507,7 +516,11 @@ const EvolutionChain = async () => {
               const promise = await fetch(FinalImgFetchLink2);
               const data = await promise.json();
               let familyName = document.createElement("img");
-              familyName.src = data.sprites.other.home.front_default;
+              if(data.sprites.other.home.front_default === null){
+                familyName.src = "/assets/pokeball-pokemon-catch.svg"
+              } else {
+                familyName.src = data.sprites.other.home.front_default;
+              }
               familyName.setAttribute("class", "family");
               familyName.setAttribute("id", EvolutionArr[i]);
               Family.appendChild(familyName);
@@ -539,6 +552,7 @@ const getPokemon = async () => {
   const promise = await fetch(FetchLink);
   const data = await promise.json();
   SpecificNames();
+  CurrentNum = Number(data.id);
   document.getElementById("pokemonImg").src =data.sprites.other.home.front_default;
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
@@ -725,6 +739,38 @@ ShinyFunction();
 RandomBtn.addEventListener("click", async () => {
   RandomNum = Math.floor(Math.random() * 1026);
   userInput = RandomNum;
+  FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+  Default = "";
+  Shiny = "";
+  document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+  ShinyImg = true;
+  getPokemon();
+  empty(list);
+  empty(Family);
+});
+Previous.addEventListener("click", async () => {
+  if(CurrentNum === 1){
+    CurrentNum = 1025
+  } else {
+    CurrentNum -= 1
+  }
+  userInput = CurrentNum.toString();
+  FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+  Default = "";
+  Shiny = "";
+  document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+  ShinyImg = true;
+  getPokemon();
+  empty(list);
+  empty(Family);
+});
+Next.addEventListener("click", async () => {
+  if(CurrentNum === 1025){
+    CurrentNum = 1
+  } else {
+    CurrentNum += 1
+  }
+  userInput = CurrentNum.toString();
   FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
   Default = "";
   Shiny = "";

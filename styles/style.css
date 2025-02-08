@@ -17,7 +17,7 @@ body{
 
 .homeScreen{
     color: white;
-    background-image: url('public/assets/Background.png');
+    background-image: url('/Background.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -35,6 +35,15 @@ body{
     font-size: 75px;
 }
 
+.nameBar{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.arrow:hover{
+    opacity: 60%;
+}
+
 .start-div{
     font-size: 40px;
 }
@@ -49,7 +58,7 @@ body{
  }
 
 .mainImg{
-    background-image: url(public/assets/pokeball-pokemon-catch.svg);
+    background-image: url('/assets/pokeball-pokemon-catch.svg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: center;
