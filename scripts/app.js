@@ -482,6 +482,18 @@ const EvolutionChain = async () => {
               }
             familyName.setAttribute("class", "family");
             familyName.setAttribute("id", EvolutionArr[i]);
+            familyName.addEventListener('click', async () => {
+              userInput = data.id
+              FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+             //SpecificSearches()
+              Default = "";
+              Shiny = "";
+              document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+              ShinyImg = true;
+              empty(list);
+              empty(Family);
+              getPokemon();
+            })
             Family.appendChild(familyName);
           };
           FinalImg();
@@ -523,6 +535,18 @@ const EvolutionChain = async () => {
               }
               familyName.setAttribute("class", "family");
               familyName.setAttribute("id", EvolutionArr[i]);
+              familyName.addEventListener('click', async () => {
+                userInput = data.id
+              FetchLink = `https://pokeapi.co/api/v2/pokemon/${userInput}`;
+             //SpecificSearches()
+              Default = "";
+              Shiny = "";
+              document.getElementById("shinyIcon").src = "/assets/Shiny.png";
+              ShinyImg = true;
+              empty(list);
+              empty(Family);
+              getPokemon();
+              })
               Family.appendChild(familyName);
             };
             FinalImg2();
@@ -636,7 +660,9 @@ const getPokemon = async () => {
       MoveArr.push(data.moves[i].move.name);
       let ul = document.createElement("ul");
       ul.setAttribute("class", "moves");
-      ul.setAttribute("onclick", "Alert()");
+      ul.addEventListener('click', function () {
+        alert(data.moves[i].move.name.replaceAll("-", " "))
+      });
       ul.innerText = ToUpper(data.moves[i].move.name.replaceAll("-", " "));
       list.appendChild(ul);
     }
