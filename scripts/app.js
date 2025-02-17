@@ -87,7 +87,10 @@ let SpecialPokemonArr = [
   "farfetchd",
   "sirfetchd",
   "type null",
-  "toxtricity"
+  "toxtricity",
+  "enamorus",
+  "maushold",
+  "palafin"
 ]
 let SpecialPokemonNum = [
   "386",
@@ -117,7 +120,10 @@ let SpecialPokemonNum = [
   "83",
   "865",
   "772",
-  "849"
+  "849",
+  "905",
+  "925",
+  "964"
 ]
 let SpecialNamesArr = [
 "ho-oh",
@@ -159,7 +165,10 @@ let SpecialNamesArr = [
 "farfetchd",
 "sirfetchd",
 "type-null",
-"toxtricity-amped"
+"toxtricity-amped",
+"enamorus-incarnate",
+"maushold-family-of-four",
+"palafin-zero"
 ]
 let ScreenNameArr = [
 "Ho-oh",
@@ -201,7 +210,10 @@ let ScreenNameArr = [
 "Farfetch'd",
 "Sirfetch'd",
 "Type: Null",
-"Toxtricity"
+"Toxtricity",
+"Enamorus",
+"Maushold",
+"Palafin"
 ]
 
 let Previous = document.getElementById("previous");
@@ -578,6 +590,7 @@ const getPokemon = async () => {
   SpecificNames();
   CurrentNum = Number(data.id);
   document.getElementById("pokemonImg").src =data.sprites.other.home.front_default;
+  PokemonImg.className = 'floater'
   Default = data.sprites.other.home.front_default;
   HP.innerText = "HP: " + data.stats[0].base_stat;
   Attack.innerText = "Attack: " + data.stats[1].base_stat;
@@ -658,12 +671,23 @@ const getPokemon = async () => {
   function MoveFunction(){
     for (let i = 0; i < data.moves.length; i++) {
       MoveArr.push(data.moves[i].move.name);
+      let MoveName = ToUpper(data.moves[i].move.name.replaceAll("-", " "))
       let ul = document.createElement("ul");
       ul.setAttribute("class", "moves");
+      let MoveLink = data.moves[i].move.url
       ul.addEventListener('click', function () {
-        alert(data.moves[i].move.name.replaceAll("-", " "))
+        const MoveInfo = async () => {
+          const promise = await fetch(MoveLink);
+          const data = await promise.json();
+          let MoveType = ToUpper(data.type.name)
+          let MoveDesc = data.effect_entries[0].short_effect
+          let MoveClass = ToUpper(data.damage_class.name)
+          alert(MoveName + " - Type: " + MoveType + " - Category: " + MoveClass + " - " + MoveDesc)
+        }
+        MoveInfo()
+        //alert(data.moves[i].move.url)
       });
-      ul.innerText = ToUpper(data.moves[i].move.name.replaceAll("-", " "));
+      ul.innerText = MoveName;
       list.appendChild(ul);
     }
   }
