@@ -20,6 +20,10 @@ body{
     display: none
 }
 
+#moveExit:hover{
+    opacity: 50%;
+}
+
 .homeScreen{
     color: white;
     background-image: url('/Background.png');

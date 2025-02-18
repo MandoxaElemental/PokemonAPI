@@ -6,9 +6,6 @@ import {
 
 let Home = document.getElementById("homeScreen")
 let DexMenu = document.getElementById("dex")
-
-
-
 let Name = document.getElementById("name");
 let PokemonCry = document.getElementById("pokemonCry");
 let convertedNum = 0;
@@ -52,6 +49,7 @@ let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="cu
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg>`;
 let MovePopup = document.getElementById('movePopup')
+let MoveExit = document.getElementById('moveExit')
 
 let Ability1Link = ""
 let Ability2Link = ""
@@ -448,7 +446,7 @@ function Types2() {
   }
 }
 const EvolutionChain = async () => {
-  try {
+  // try {
     Varieties = [];
     const promise = await fetch(EvolutionLink);
     const data = await promise.json();
@@ -573,9 +571,9 @@ const EvolutionChain = async () => {
     };
     GetEvolutionChain();
     
-  } catch (error) {
-    MissingNoInfo()
-  }
+  // } catch (error) {
+  //   MissingNoInfo()
+  // }
 };
 
 const getPokemon = async () => {
@@ -1092,6 +1090,6 @@ function ExtendedFamily(){
     
 }
 
-// MovePopup.addEventListener('mouseout', async () => {
-  
-// })
+MoveExit.addEventListener('click', async () => {
+  MovePopup.className = 'hidden'
+})
