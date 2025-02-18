@@ -51,7 +51,11 @@ let X = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="cu
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg>`;
+let MovePopup = document.getElementById('movePopup')
 
+let Ability1Link = ""
+let Ability2Link = ""
+let Ability3Link = ""
 let OfficialArtWork = "official-artwork"
 
 document.getElementById("bgMusic").src = "/assets/audio/Pokémon TCG Pocket OST - Feed Menu BGM [ ezmp3.cc ].mp3";
@@ -443,7 +447,6 @@ function Types2() {
       break;
   }
 }
-
 const EvolutionChain = async () => {
   try {
     Varieties = [];
@@ -610,6 +613,7 @@ const getPokemon = async () => {
     Type2.hidden = true;
   }
 
+
   function SpecificNames() {
     for(let i=0; i<SpecialNamesArr.length; i++)
     if (data.name === SpecialNamesArr[i]) {
@@ -629,6 +633,9 @@ const getPokemon = async () => {
       );
       Ability2.hidden = true;
       Ability3.hidden = true;
+      Ability1Link = data.abilities[0].ability.url
+      Ability2Link = ""
+      Ability3Link = ""
     } else if (data.abilities.length == 2) {
       Ability1.innerText = ToUpper(
         data.abilities[0].ability.name.replaceAll("-", " ")
@@ -637,6 +644,9 @@ const getPokemon = async () => {
         "HA: " + ToUpper(data.abilities[1].ability.name.replaceAll("-", " "));
       Ability2.hidden = false;
       Ability3.hidden = true;
+      Ability1Link = data.abilities[0].ability.url
+      Ability2Link = data.abilities[1].ability.url
+      Ability3Link = ""
     } else if (data.abilities.length == 3) {
       Ability1.innerText = ToUpper(
         data.abilities[0].ability.name.replaceAll("-", " ")
@@ -648,8 +658,52 @@ const getPokemon = async () => {
         "HA: " + ToUpper(data.abilities[2].ability.name.replaceAll("-", " "));
       Ability2.hidden = false;
       Ability3.hidden = false;
+      Ability1Link = data.abilities[0].ability.url
+      Ability2Link = data.abilities[1].ability.url
+      Ability3Link = data.abilities[2].ability.url
     }
   }
+
+  // const GetAbility1 = async () => {
+  //   const promise = await fetch(Ability1Link);
+  //   const data = await promise.json();
+  //   Ability1.addEventListener('click', async () => {    
+  //     if(data.effect_entries[0].language.name === "en"){
+  //       alert(data.effect_entries[0].short_effect)
+  //       console.log(data.effect_entries[0].short_effect)
+  //     } else {
+  //       alert(data.effect_entries[1].short_effect)
+  //       console.log(data.effect_entries[1].short_effect)
+  //     }
+  //   })
+  // }
+  // GetAbility1()
+
+  // Ability2.addEventListener('click', async () => {
+  //   const GetAbility2 = async () => {
+  //     const promise = await fetch(Ability2Link);
+  //     const data = await promise.json();
+  //     if(data.effect_entries[0].language.name === "en"){
+  //       alert(data.effect_entries[0].short_effect)
+  //     } else {
+  //       alert(data.effect_entries[1].short_effect)
+  //     }
+  //   }
+  //   GetAbility2()
+  // })
+  // Ability3.addEventListener('click', async () => {
+  //   const GetAbility3 = async () => {
+  //     const promise = await fetch(Ability3Link);
+  //     const data = await promise.json();
+  //     if(data.effect_entries[0].language.name === "en"){
+  //       alert(data.effect_entries[0].short_effect)
+  //     } else {
+  //       alert(data.effect_entries[1].short_effect)
+  //     }
+  //   }
+  //   GetAbility3()
+  // })  
+
   const GetLocation = async () => {
     const promise = await fetch(Location);
     const data = await promise.json();
@@ -676,16 +730,88 @@ const getPokemon = async () => {
       ul.setAttribute("class", "moves");
       let MoveLink = data.moves[i].move.url
       ul.addEventListener('click', function () {
+        MovePopup.className = 'move-desc-box background rounded-xl'
         const MoveInfo = async () => {
           const promise = await fetch(MoveLink);
           const data = await promise.json();
-          let MoveType = ToUpper(data.type.name)
-          let MoveDesc = data.effect_entries[0].short_effect
-          let MoveClass = ToUpper(data.damage_class.name)
-          alert(MoveName + " - Type: " + MoveType + " - Category: " + MoveClass + " - " + MoveDesc)
-        }
+          document.getElementById('moveName').innerText = MoveName
+          let MoveType = data.type.name
+          function MoveTyping() {
+            switch (MoveType) {
+              case "normal":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Normal.png";
+                break;
+              case "fighting":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Fighting.png";
+                break;
+              case "flying":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Flying.png";
+                break;
+              case "poison":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Poison.png";
+                break;
+              case "ground":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Ground.png";
+                break;
+              case "rock":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Rock.png";
+                break;
+              case "bug":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Bug.png";
+                break;
+              case "ghost":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Ghost.png";
+                break;
+              case "steel":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Steel.png";
+                break;
+              case "fire":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Fire.png";
+                break;
+              case "water":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Water.png";
+                break;
+              case "grass":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Grass.png";
+                break;
+              case "electric":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Electric.png";
+                break;
+              case "psychic":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Psychic.png";
+                break;
+              case "ice":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Ice.png";
+                break;
+              case "dragon":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Dragon.png";
+                break;
+              case "dark":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Dark.png";
+                break;
+              case "fairy":
+                document.getElementById("moveType").src = "/assets/pokemonTypes/Fairy.png";
+                break;
+              default:
+                break;
+            }
+          }
+          MoveTyping()
+          console.log(data.type.name)
+          document.getElementById('moveDescription').innerText = data.effect_entries[0].short_effect
+          if(data.power != null){
+            document.getElementById('movePower').innerText = "Power: " + data.power
+          } else {
+            document.getElementById('movePower').innerText = ""
+          }
+          if(data.accuracy != null){
+            document.getElementById('moveAccuracy').innerText = "Accuracy: " + data.accuracy
+          } else {
+            document.getElementById('moveAccuracy').innerText = ""
+          }
+          document.getElementById('moveCategory').innerText = "Category: " + ToUpper(data.damage_class.name)
+                }
         MoveInfo()
-        //alert(data.moves[i].move.url)
       });
       ul.innerText = MoveName;
       list.appendChild(ul);
@@ -965,3 +1091,7 @@ PokemonImg.addEventListener('click', async () => {
 function ExtendedFamily(){
     
 }
+
+// MovePopup.addEventListener('mouseout', async () => {
+  
+// })

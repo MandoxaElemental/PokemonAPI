@@ -1,9 +1,14 @@
+@font-face {
+    font-family: customFont;
+    src: url(/assets/fonts/FOT-KafuTechnoStd-H.otf);
+}
+
 body{
     background-image: url('/Background.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: customFont;
 }
 
 #logo{
@@ -68,6 +73,10 @@ body{
 .moveList{
     height: 150px;
     overflow: scroll;
+}
+.moveDescBox{
+    padding: 15px;
+    background-color: white;
 }
 .statList{
     height: 150px;
@@ -184,6 +193,19 @@ input{
 .moves:hover{
     opacity: 60%;
 }
+
+.move-desc-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+
+/* .family-grid{
+    border: thick solid #F5AD1A;
+    border-radius: ;
+} */
 
 @media (max-width:768px){
     .responsive-grid{
